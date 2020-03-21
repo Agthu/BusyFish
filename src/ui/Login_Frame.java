@@ -17,9 +17,9 @@ public class Login_Frame extends JFrame {
 }
 
 /*账号输入框*/
-class Input_Id extends JTextField {
+class Input_Id extends BTextField {
     public Input_Id() {
-
+        super("请输入账号");
     }
 }
 
