@@ -6,7 +6,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 /**
- * 设置全局文本框样式
+ * 设置全局默认文本框样式
  * @author Lian Guan
  */
 public class BTextField extends JTextField implements FocusListener {
@@ -18,7 +18,7 @@ public class BTextField extends JTextField implements FocusListener {
     private String hintText;
 
     /**
-     * 实例化
+     * <code>BTextField</code> 构造方法
      * @param hintText 提示性文字，类似于html的占位符
      */
     public BTextField(String hintText) {

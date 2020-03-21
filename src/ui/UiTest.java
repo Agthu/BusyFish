@@ -12,7 +12,7 @@ public class UiTest {
         c.setLayout(new FlowLayout());
 
         c.add(new BTextField("请输入账号"));
-        c.add(new BTextField("请输入密码"));
+        c.add(new BPasswordField("请输入密码"));
 
         jf.setVisible(true);
     }

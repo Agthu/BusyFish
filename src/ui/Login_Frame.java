@@ -16,7 +16,10 @@ public class Login_Frame extends JFrame {
     }
 }
 
-/*账号输入框*/
+/**
+ * 账号输入框
+ * @see BTextField
+ */
 class Input_Id extends BTextField {
     public Input_Id() {
         super("请输入账号");
