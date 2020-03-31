@@ -1,5 +1,6 @@
 package ui;
 
+import ui.Bstyle.BButton;
 import ui.Bstyle.BFrame;
 import ui.Bstyle.BPasswordField;
 import ui.Bstyle.BTextField;
@@ -26,6 +27,7 @@ public class Login_Frame extends BFrame {
         container.setLayout(new FlowLayout());
         container.add(new Input_Id());
         container.add(new Input_Password());
+        container.add(new Login_Button());
 
         this.setResizable(false);
 
@@ -53,8 +55,8 @@ class Input_Password extends BPasswordField {
 }
 
 /*登陆按钮*/
-class Login_Button extends JButton {
+class Login_Button extends BButton {
     public Login_Button() {
-
+        super("登录");
     }
 }
