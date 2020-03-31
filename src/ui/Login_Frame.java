@@ -54,7 +54,11 @@ class Input_Password extends BPasswordField {
     }
 }
 
-/*登陆按钮*/
+
+/**
+ * 登陆按钮
+ * @see BButton
+ */
 class Login_Button extends BButton {
     public Login_Button() {
         super("登录");
