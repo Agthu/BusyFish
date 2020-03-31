@@ -32,6 +32,8 @@ public class BTextField extends JTextField implements FocusListener {
         this.setForeground(Color.GRAY);
 
         this.addFocusListener(this);
+
+        this.setBorder(new BRoundBorder(Color.RED));
     }
 
     /**

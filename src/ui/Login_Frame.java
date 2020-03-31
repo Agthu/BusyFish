@@ -3,7 +3,11 @@ package ui;
 import javax.swing.*;
 import java.awt.*;
 
-public class Login_Frame extends JFrame {
+/**
+ * 登陆窗口
+ * @see BFrame
+ */
+public class Login_Frame extends BFrame {
     public Login_Frame() {
 
         // 用super的方式重命名窗口
@@ -11,7 +15,12 @@ public class Login_Frame extends JFrame {
 
         //设置大小、位置
         this.setBounds(500, 500, 800, 600);
+
+        //添加组件
         Container container  = this.getContentPane();
+        container.setLayout(new FlowLayout());
+        container.add(new Input_Id());
+        container.add(new Input_Password());
 
     }
 }
@@ -21,15 +30,18 @@ public class Login_Frame extends JFrame {
  * @see BTextField
  */
 class Input_Id extends BTextField {
-    public Input_Id() {
+    Input_Id() {
         super("请输入账号");
     }
 }
 
-/*密码输入框*/
+/**
+ * 密码输入框
+ * @see BPasswordField
+ */
 class Input_Password extends JPasswordField {
-    public Input_Password() {
-
+    Input_Password() {
+        super("请输入密码");
     }
 }
 
