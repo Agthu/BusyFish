@@ -1,5 +1,9 @@
 package ui;
 
+import ui.Bstyle.BFrame;
+import ui.Bstyle.BPasswordField;
+import ui.Bstyle.BTextField;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -10,17 +14,20 @@ import java.awt.*;
 public class Login_Frame extends BFrame {
     public Login_Frame() {
 
-        // 用super的方式重命名窗口
+        // 重命名窗口
         super("登陆");
 
         //设置大小、位置
-        this.setBounds(500, 500, 800, 600);
+        this.setSize(400, 300);
+        this.setLocationRelativeTo(null);
 
         //添加组件
         Container container  = this.getContentPane();
         container.setLayout(new FlowLayout());
         container.add(new Input_Id());
         container.add(new Input_Password());
+
+        this.setResizable(false);
 
     }
 }
@@ -39,7 +46,7 @@ class Input_Id extends BTextField {
  * 密码输入框
  * @see BPasswordField
  */
-class Input_Password extends JPasswordField {
+class Input_Password extends BPasswordField {
     Input_Password() {
         super("请输入密码");
     }

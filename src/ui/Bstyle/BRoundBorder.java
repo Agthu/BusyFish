@@ -1,4 +1,4 @@
-package ui;
+package ui.Bstyle;
 
 import javax.swing.border.Border;
 import java.awt.*;

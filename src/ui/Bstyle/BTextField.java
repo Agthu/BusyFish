@@ -1,4 +1,4 @@
-package ui;
+package ui.Bstyle;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,7 +22,6 @@ public class BTextField extends JTextField implements FocusListener {
      * @param hintText 提示性文字，类似于html的占位符
      */
     public BTextField(String hintText) {
-
         this.hintText = hintText;
 
         // 设置默认文本为hintText
@@ -31,9 +30,14 @@ public class BTextField extends JTextField implements FocusListener {
         //提示文本为灰色
         this.setForeground(Color.GRAY);
 
+        //添加监听器：获得焦点的监听器
         this.addFocusListener(this);
 
+        //设置边框
         this.setBorder(new BRoundBorder(Color.RED));
+
+        //TODO 设置文字大小
+        this.setFont(new Font(this.getFont().getFontName(), Font.BOLD, 16));
     }
 
     /**

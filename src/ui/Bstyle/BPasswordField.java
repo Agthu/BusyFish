@@ -1,4 +1,4 @@
-package ui;
+package ui.Bstyle;
 
 import javax.swing.*;
 import java.awt.*;
