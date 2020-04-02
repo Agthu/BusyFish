@@ -20,6 +20,6 @@ public final class BColor { // final修饰防止被继承
     // 暗主题色
     public static final Color DARK_THEME_COLOR = new Color(1,113,102);
 
-    // 亮色字体，显示在主题色前面
+    // 亮色字体，即在主题色之前显示的字体
     public static final Color BRI_FONT_COLOR = new Color(169, 220, 215);
 }
