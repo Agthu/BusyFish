@@ -6,8 +6,7 @@ import java.awt.*;
 /**
  * 本类专门存储项目中用到的所有颜色
  */
-// final修饰防止被继承
-public final class BColor {
+public final class BColor { // final修饰防止被继承
 
     // 私有构造方法防止实例化
     private BColor() { }

@@ -28,9 +28,6 @@ public class BFrame extends JFrame {
     public BFrame(String title) {
         super(title);
 
-        //设置关闭事件：退出程序
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
         //设置背景色
         this.getContentPane().setBackground(Color.WHITE);
     }

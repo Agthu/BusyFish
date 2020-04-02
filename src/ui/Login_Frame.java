@@ -16,27 +16,34 @@ import java.util.Arrays;
  * @see BFrame
  */
 public class Login_Frame extends BFrame {
-
-    // 账号和密码输入框、登陆按钮的引用
-    private JTextField idField;
-    private JPasswordField passwordField;
-    private JButton loginButton;
+    private JFrame loginFrame; // 登陆窗口的引用
+    private Container container; // 窗口容器的引用
+    private JTextField idField; // 账号输入框的引用
+    private JPasswordField passwordField; // 密码输入框的引用
+    private JButton loginButton; // 登陆按钮的引用
+    private JButton registerButton; // 注册按钮的引用
 
     public Login_Frame() {
-
         // 重命名窗口
         super("登陆");
 
+        loginFrame = this;
+
         // 设置大小、位置
         this.setSize(400, 300);
+        // 居中显示
         this.setLocationRelativeTo(null);
 
+        // 关闭后退出程序
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
         // 添加组件
-        Container container  = this.getContentPane();
+        container  = this.getContentPane();
         container.setLayout(new FlowLayout());
         container.add(idField = new Input_Id()); // 添加账号输入框
         container.add(passwordField = new Input_Password()); // 添加密码输入框
         container.add(loginButton = new Login_Button()); // 添加登陆按钮
+        container.add(registerButton = new Register_Button());//添加注册按钮
 
         // 不可拖动窗口边缘来改变大小
         this.setResizable(false);
@@ -48,15 +55,26 @@ public class Login_Frame extends BFrame {
      * @see BButton
      */
     class Login_Button extends BButton {
-        public Login_Button() {
+        Login_Button() {
             super("登录");
 
-            this.addActionListener(new ActionListener() {
+            this.addActionListener(e -> {
+                // TODO 登录功能实现
+            });
 
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    // TODO 登录功能实现
-                }
+        }
+    }
+
+    /**
+     * 注册按钮
+     * @see BButton
+     */
+    class Register_Button extends BButton {
+        Register_Button() {
+            super("注册");
+
+            this.addActionListener(e -> {
+                new Register_Frame();
             });
 
         }
@@ -83,5 +101,3 @@ class Input_Password extends BPasswordField {
         super("请输入密码");
     }
 }
-
-
