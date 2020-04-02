@@ -20,6 +20,7 @@ public class Login_Frame extends BFrame {
     // 账号和密码输入框、登陆按钮的引用
     private JTextField idField;
     private JPasswordField passwordField;
+    private JButton loginButton;
 
     public Login_Frame() {
 
@@ -35,7 +36,7 @@ public class Login_Frame extends BFrame {
         container.setLayout(new FlowLayout());
         container.add(idField = new Input_Id()); // 添加账号输入框
         container.add(passwordField = new Input_Password()); // 添加密码输入框
-        container.add(new Login_Button()); // 添加登陆按钮
+        container.add(loginButton = new Login_Button()); // 添加登陆按钮
 
         // 不可拖动窗口边缘来改变大小
         this.setResizable(false);
@@ -54,7 +55,7 @@ public class Login_Frame extends BFrame {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    // TODO 登陆功能实现
+                    // TODO 登录功能实现
                 }
             });
 
