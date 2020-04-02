@@ -14,9 +14,12 @@ public final class BColor { // final修饰防止被继承
     // 主题色:水鸭青
     public static final Color THEME_COLOR = new Color(1, 151, 136);
 
-    // 提高亮度的主题色
-    public static final Color LIGHT_THEME_COLOR = new Color(1, 177, 159);
+    // 亮主题色
+    public static final Color BRIGHT_THEME_COLOR = new Color(1, 177, 159);
 
     // 暗主题色
     public static final Color DARK_THEME_COLOR = new Color(1,113,102);
+
+    // 亮色字体，显示在主题色前面
+    public static final Color BRI_FONT_COLOR = new Color(169, 220, 215);
 }

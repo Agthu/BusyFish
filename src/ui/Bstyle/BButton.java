@@ -54,7 +54,7 @@ public class BButton extends JButton implements MouseListener {
      */
     @Override
     public void mouseEntered(MouseEvent e) {
-        this.setBackground(BColor.LIGHT_THEME_COLOR);
+        this.setBackground(BColor.BRIGHT_THEME_COLOR);
     }
 
     /**
