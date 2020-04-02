@@ -24,7 +24,7 @@ public class BButton extends JButton implements MouseListener {
         this.setBackground(BColor.THEME_COLOR);
 
         // 字体为白色
-        this.setForeground(Color.WHITE);
+        this.setForeground(BColor.BRI_FONT_COLOR);
 
         // 去掉文字周围的焦点框
         this.setFocusPainted(false);
@@ -54,7 +54,7 @@ public class BButton extends JButton implements MouseListener {
      */
     @Override
     public void mouseEntered(MouseEvent e) {
-        this.setBackground(BColor.BRIGHT_THEME_COLOR);
+        this.setBackground(BColor.BRI_THEME_COLOR);
     }
 
     /**

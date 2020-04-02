@@ -29,6 +29,6 @@ public class BFrame extends JFrame {
         super(title);
 
         //设置背景色
-        this.getContentPane().setBackground(Color.WHITE);
+        this.getContentPane().setBackground(BColor.BG_LIGHT_GRAY);
     }
 }
