@@ -17,7 +17,7 @@ import java.util.Arrays;
  */
 public class Login_Frame extends BFrame {
 
-    // 账号和密码输入框的引用
+    // 账号和密码输入框、登陆按钮的引用
     private JTextField idField;
     private JPasswordField passwordField;
 
