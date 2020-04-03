@@ -11,7 +11,7 @@ public final class BColor { // final修饰防止被继承
     // 私有构造方法防止实例化
     private BColor() { }
 
-    // 主题色:水鸭青
+    // 主题色
     public static final Color THEME_COLOR = new Color(1, 151, 136);
 
     // 亮主题色

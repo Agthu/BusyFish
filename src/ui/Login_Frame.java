@@ -16,6 +16,7 @@ import java.util.Arrays;
  * @see BFrame
  */
 public class Login_Frame extends BFrame {
+
     private JFrame loginFrame; // 登陆窗口的引用
     private Container container; // 窗口容器的引用
     private JTextField idField; // 账号输入框的引用
@@ -48,6 +49,14 @@ public class Login_Frame extends BFrame {
         // 不可拖动窗口边缘来改变大小
         this.setResizable(false);
 
+    }
+
+    /**
+     * 获取登录按钮
+     * @return 登录按钮的引用
+     */
+    public JButton getLoginButton() {
+        return loginButton;
     }
 
     /**
