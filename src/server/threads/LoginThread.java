@@ -8,23 +8,29 @@ import java.net.Socket;
  */
 public class LoginThread extends Thread {
     private Socket socket;
+
+    /**
+     * 构造方法
+     * @param socket 输入账号密码的socket
+     */
     public LoginThread(Socket socket) {
         this.socket = socket;
+        System.out.println("开启新线程");
     }
 
     //启动线程，响应客户端请求
     @Override
     public void run() {
         try {
-            InputStream ins = socket.getInputStream(); // 输入流，读取账号、密码
-            OutputStream outs = socket.getOutputStream(); // 输出流，输出登录结果数据
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(ins));
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(outs));
+            BufferedReader br = new BufferedReader(new InputStreamReader(
+                    socket.getInputStream()
+            ));
+            System.out.println("创建br对象");
 
-            String info = br.readLine();
-            System.out.println(br);
-            bw.write(info);
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
+                    socket.getOutputStream()
+            ));
 
         } catch (IOException e) {
             e.printStackTrace();
