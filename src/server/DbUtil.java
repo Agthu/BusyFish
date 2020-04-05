@@ -37,7 +37,7 @@ public class DbUtil {
         // 建立数据库连接
         Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
 
-        // 具体的命令
+        // 具体的命令，在accounts这个表中添加一条数据
         String sql = "insert into accounts(account_id,account_name,account_password)" +
                 " values(?,?,?) ";
 
@@ -49,7 +49,7 @@ public class DbUtil {
 
         try {
             // executeUpdate()函数执行增删改操作，返回更新的行数
-            int rowsChanged = ps.executeUpdate();
+            ps.executeUpdate();
         } catch(SQLException e) {
             e.printStackTrace();
         } finally {
@@ -57,6 +57,16 @@ public class DbUtil {
             conn.close();
             ps.close();
         }
+    }
+
+    /**
+     * TODO 检测用户名和密码是否匹配
+     * @param account_id 用户名
+     * @param account_password 密码
+     * @return true代表匹配，false代表不匹配
+     */
+    public static boolean idMatch(String account_id, String account_password) {
+        return true;
     }
 
 }
