@@ -26,7 +26,7 @@ public class DbUtil {
     }
 
     /**
-     * TODO 注册账号
+     * 注册账号
      * @param account_id 用户名
      * @param account_name 昵称
      * @param account_password 密码
@@ -47,15 +47,16 @@ public class DbUtil {
         ps.setString(2, account_name);
         ps.setString(3, account_password);
 
-        // executeUpdate()函数执行增删改操作，返回更新的行数
-        int rowsChanged = ps.executeUpdate();
-        if(rowsChanged == 1) {
-            System.out.println("添加成功");
+        try {
+            // executeUpdate()函数执行增删改操作，返回更新的行数
+            int rowsChanged = ps.executeUpdate();
+        } catch(SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // 关闭连接，释放资源
+            conn.close();
+            ps.close();
         }
-
-        // 关闭连接，释放资源
-        conn.close();
-        ps.close();
     }
 
 }
