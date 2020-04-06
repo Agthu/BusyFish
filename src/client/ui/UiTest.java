@@ -1,7 +1,4 @@
-package ui;
-
-import javax.swing.*;
-import java.awt.*;
+package client.ui;
 
 public class UiTest {
     public static void main(String[] args) {

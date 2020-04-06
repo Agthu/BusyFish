@@ -1,6 +1,6 @@
-package ui;
+package client.ui;
 
-import ui.Bstyle.BFrame;
+import client.ui.Bstyle.BFrame;
 
 public class Register_Frame extends BFrame {
     public Register_Frame() {

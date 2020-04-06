@@ -1,4 +1,4 @@
-package ui.Bstyle;
+package client.ui.Bstyle;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,15 +1,12 @@
-package ui;
+package client.ui;
 
-import ui.Bstyle.BButton;
-import ui.Bstyle.BFrame;
-import ui.Bstyle.BPasswordField;
-import ui.Bstyle.BTextField;
+import client.ui.Bstyle.BButton;
+import client.ui.Bstyle.BFrame;
+import client.ui.Bstyle.BPasswordField;
+import client.ui.Bstyle.BTextField;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Arrays;
 
 /**
  * 登陆窗口

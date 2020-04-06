@@ -1,9 +1,6 @@
-package ui.Bstyle;
+package client.ui.Bstyle;
 
 import javax.swing.*;
-import com.mysql.jdbc.*;
-
-import java.awt.*;
 
 /**
  * 修改默认窗口样式
