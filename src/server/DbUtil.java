@@ -31,8 +31,9 @@ public class DbUtil {
      * @param account_id 用户名
      * @param account_name 昵称
      * @param account_password 密码
+     * @return true代表注册成功，false代表注册失败
      */
-    public static void createAccount(
+    public static boolean createAccount(
             String account_id, String account_name, String account_password) throws SQLException {
 
         // 建立数据库连接
@@ -51,8 +52,9 @@ public class DbUtil {
         try {
             // executeUpdate()函数执行增删改操作，返回更新的行数
             ps.executeUpdate();
+            return true;
         } catch(SQLException e) {
-            e.printStackTrace();
+            return false;
         } finally {
             // 关闭连接，释放资源
             conn.close();
