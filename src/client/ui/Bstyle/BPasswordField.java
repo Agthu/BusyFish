@@ -34,6 +34,12 @@ public class BPasswordField extends JPasswordField implements FocusListener {
 
         //添加监听器
         this.addFocusListener(this);
+
+        // 设置字体大小
+        this.setFont(new Font(
+                this.getFont().getFontName(),
+                Font.BOLD,
+                BStandard.TEXT_FIELD_SIZE));
     }
 
     /**

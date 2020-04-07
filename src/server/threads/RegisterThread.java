@@ -8,10 +8,6 @@ import java.sql.SQLException;
 
 public class RegisterThread extends Thread {
 
-    // MySQL 8.0 以上版本 - JDBC 驱动名及数据库 URL
-    static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost:3306/busyfish?useSSL=false&serverTimezone=UTC";
-
     private Socket socket;
 
     public RegisterThread(Socket socket) {
@@ -33,7 +29,7 @@ public class RegisterThread extends Thread {
             String name = reader.readLine();
             String password = reader.readLine();
 
-            // 创建成功/失败时，向客户端发送提示信息
+            // 注册成功/失败时，向客户端发送提示信息
             if(DbUtil.createAccount(id, name, password)) {
                 writer.println("Register succeeded");
             } else {

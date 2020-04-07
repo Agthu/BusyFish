@@ -27,17 +27,17 @@ public class BTextField extends JTextField implements FocusListener {
         // 设置默认文本为hintText
         this.setText(this.hintText);
 
-        //提示文本为灰色
+        // 提示文本为灰色
         this.setForeground(Color.GRAY);
 
-        //添加监听器：获得焦点的监听器
+        // 添加监听器：获得焦点的监听器
         this.addFocusListener(this);
 
-        //设置边框
-        this.setBorder(new BRoundBorder(Color.RED));
-
-        //TODO 设置文字大小
-        this.setFont(new Font(this.getFont().getFontName(), Font.BOLD, 16));
+        // 设置文字大小
+        this.setFont(new Font(
+                this.getFont().getFontName(),  // 原字体
+                Font.BOLD,  // 加粗
+                BStandard.TEXT_FIELD_SIZE)); // 字号
     }
 
     /**
