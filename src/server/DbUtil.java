@@ -9,9 +9,10 @@ public class DbUtil {
     // MySQL 8.0 以上版本 - JDBC 驱动名及数据库 URL
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String DB_URL =
-            "jdbc:mysql://localhost:3306/busyfish?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";
+            "jdbc:mysql://localhost:3306/busyfish?useSSL=false" +
+                    "&serverTimezone=UTC&allowPublicKeyRetrieval=true";
 
-    // 数据库的用户名与密码，需要根据自己的设置
+    // 数据库的用户名与密码
     private static final String USER = "root";
     private static final String PASSWORD = "20010806123";
 
@@ -61,9 +62,9 @@ public class DbUtil {
 
     /**
      * 检测用户名和密码是否匹配
-     * @param account_id 用户名
-     * @param account_password 密码
-     * @return true代表匹配，false代表不匹配
+     * @param account_id 被检测的用户名
+     * @param account_password 被检测的密码
+     * @return true代表匹配，false代表不匹配(用户不存在或密码错误)
      */
     public static boolean idMatch(String account_id, String account_password) throws SQLException {
         // 取得连接

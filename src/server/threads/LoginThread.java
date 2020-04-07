@@ -30,6 +30,7 @@ public class LoginThread extends Thread {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
                     socket.getOutputStream()
             ));
+            PrintWriter pw = new PrintWriter(bw, true);
 
             // 读取客户端传来的用户名
             String account_id = br.readLine();
