@@ -68,7 +68,8 @@ public class DbUtil {
      * @param account_password 被检测的密码
      * @return true代表匹配，false代表不匹配(用户不存在或密码错误)
      */
-    public static boolean idMatch(String account_id, String account_password) throws SQLException {
+    public static boolean idMatch(
+            String account_id, String account_password) throws SQLException {
         // 取得连接
         Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
 
