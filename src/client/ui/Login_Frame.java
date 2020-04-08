@@ -37,9 +37,12 @@ public class Login_Frame extends BFrame {
 
         // 添加组件
         container  = this.getContentPane();
-        container.setLayout(new FlowLayout());
-        container.add(idField = new Input_Id()); // 添加账号输入框
-        container.add(passwordField = new Input_Password()); // 添加密码输入框
+        container.setLayout(new FlowLayout(FlowLayout.CENTER));
+        JPanel textFieldPanel = new JPanel(new FlowLayout());
+        textFieldPanel.setSize(280, 50);
+        textFieldPanel.add(idField = new Input_Id());
+        textFieldPanel.add(passwordField = new Input_Password());
+        container.add(textFieldPanel);
         container.add(loginButton = new Login_Button()); // 添加登陆按钮
         container.add(registerButton = new Register_Button());//添加注册按钮
 

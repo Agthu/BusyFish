@@ -101,4 +101,15 @@ public class DbUtil {
         return passwordQueried.equals(account_password);
     }
 
+    /**
+     * 发布商品
+     * @param product_id 商品编号
+     * @param product_name 商品名
+     * @param publisher_id 发布者id
+     * @param description 描述
+     */
+    public static void addProduct(int product_id, int product_name, String publisher_id,
+                                  String description) {
+
+    }
 }
