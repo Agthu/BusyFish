@@ -1,3 +1,19 @@
+/*
+数据库名：busyfish
+所有的数据表：
+    表名：accounts 字段名/类型/描述：
+        account_id / VARCHAR(30) / 用户名（主键）
+        account_name / VARCHAR(50) / 昵称
+        account_password / VARCHAR(30) / 密码
+    表名：products 字段名/类型/描述
+        product_id / INT / 商品编号(自动增长,)
+        product_name / VARCHAR(50) / 商品名称
+        publisher_id / VARCHAR(30) / 发布者id
+        product_description / VARCHAR(300) / 商品描述
+        product_price / DECIMAL(10,2) / 价格
+        bought / tinyint / 是否已被购买
+ */
+
 package server;
 
 import java.sql.*;
@@ -102,14 +118,15 @@ public class DbUtil {
     }
 
     /**
-     * 发布商品
+     * TODO 发布商品
      * @param product_id 商品编号
      * @param product_name 商品名
      * @param publisher_id 发布者id
      * @param description 描述
+     * @return true代表发布成功，false代表发布失败
      */
-    public static void addProduct(int product_id, int product_name, String publisher_id,
-                                  String description) {
-
+    public static boolean addProduct(int product_id, String product_name,
+                                  String publisher_id, String description) {
+        return true;
     }
 }
