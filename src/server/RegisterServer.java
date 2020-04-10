@@ -15,7 +15,7 @@ public class RegisterServer {
     public static final int REGISTER_PORT = 9810; // 注册功能的端口
 
     public void startServer() throws IOException {
-        registerServerSocket = new ServerSocket(9810);
+        registerServerSocket = new ServerSocket(REGISTER_PORT);
 
         while(true) {
             client = registerServerSocket.accept();

@@ -5,6 +5,7 @@
         account_id / VARCHAR(30) / 用户名（主键）
         account_name / VARCHAR(50) / 昵称
         account_password / VARCHAR(30) / 密码
+
     表名：products 字段名/类型/描述
         product_id / INT / 商品编号(自动增长,)
         product_name / VARCHAR(50) / 商品名称
@@ -12,6 +13,11 @@
         product_description / VARCHAR(300) / 商品描述
         product_price / DECIMAL(10,2) / 价格
         bought / tinyint / 是否已被购买
+
+    表名：purchase_history 字段名/类型/描述
+        record_id / INT / 记录编号
+        buyer_id / VARCHAR(30) / 买家id
+        product_id / INT / 商品编号
  */
 
 package server;
@@ -49,8 +55,8 @@ public class DbUtil {
      * @param account_password 密码
      * @return true代表注册成功，false代表注册失败
      */
-    public static boolean createAccount(
-            String account_id, String account_name, String account_password) throws SQLException {
+    public static boolean createAccount(String account_id, String account_name,
+                                        String account_password) throws SQLException {
 
         // 建立数据库连接
         Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
@@ -125,8 +131,8 @@ public class DbUtil {
      * @param price 价格
      * @return true代表发布成功，false代表发布失败
      */
-    public static boolean addProduct(String product_name,
-                                  String publisher_id, String description, double price) throws SQLException {
+    public static boolean addProduct(String product_name, String publisher_id,
+                                     String description, double price) throws SQLException {
         Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
 
         // 插入语句
@@ -146,5 +152,42 @@ public class DbUtil {
             conn.close();
             ps.close();
         }
+    }
+
+    /**
+     * TODO 购买商品
+     * @param buyer_id 购买者的id
+     * @param product_id 商品id
+     * @return true代表购买成功，false代表购买失败
+     */
+    public static boolean buyProduct(String buyer_id, String product_id)
+            throws SQLException {
+        Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+        // TODO 先查询商品是否已经被购买，如果是，返回false，
+        // TODO 否则将商品的bought改为1，并往purchase_history表中添加一条购买记录
+        return true;
+    }
+
+    /**
+     * TODO 删除商品
+     * @param product_id 被删除的商品id
+     * @return true代表删除成功，false代表失败
+     */
+    public static boolean deleteProduct(int product_id) throws SQLException {
+        Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+
+        String sql = "delete from products where product_id=?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setInt(1, product_id);
+        try {
+            ps.executeUpdate(); // 执行删除命令
+            return true;
+        } catch(SQLException e) {
+            return false;
+        } finally {
+            conn.close();
+            ps.close();
+        }
+
     }
 }
