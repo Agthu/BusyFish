@@ -9,6 +9,8 @@ import java.sql.SQLException;
 public class RegisterThread extends Thread {
 
     private Socket socket;
+    public static final String SUCCESS_MSG = "Register succeeded"; // 成功的提示信息
+    public static final String FAIL_MSG = "Register failed"; // 失败的提示信息
 
     public RegisterThread(Socket socket) {
         this.socket = socket;
@@ -31,9 +33,9 @@ public class RegisterThread extends Thread {
 
             // 注册成功/失败时，向客户端发送提示信息
             if(DbUtil.createAccount(id, name, password)) {
-                writer.println("Register succeeded");
+                writer.println(SUCCESS_MSG);
             } else {
-                writer.println("Register failed");
+                writer.println(FAIL_MSG);
             }
 
             socket.close();
