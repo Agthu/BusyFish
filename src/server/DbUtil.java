@@ -118,7 +118,7 @@ public class DbUtil {
     }
 
     /**
-     * TODO 发布商品
+     * 发布商品
      * @param product_name 商品名
      * @param publisher_id 发布者id
      * @param description 描述
@@ -128,18 +128,20 @@ public class DbUtil {
     public static boolean addProduct(String product_name,
                                   String publisher_id, String description, double price) throws SQLException {
         Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+
+        // 插入语句
         String sql = "insert into products values(null,?,?,?,?,0)";
         PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setString(1, product_name);
-        ps.setString(2, publisher_id);
-        ps.setString(3, description);
-        ps.setDouble(4, price);
+        ps.setString(1, product_name); // 商品名称
+        ps.setString(2, publisher_id); // 发布者id
+        ps.setString(3, description); // 商品描述
+        ps.setDouble(4, price); // 价格
 
         try {
             ps.executeUpdate();
-            return true;
+            return true; // 添加成功时返回true
         } catch(SQLException e) {
-            return false;
+            return false; // 失败时返回false
         } finally {
             conn.close();
             ps.close();
