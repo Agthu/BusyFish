@@ -119,14 +119,30 @@ public class DbUtil {
 
     /**
      * TODO 发布商品
-     * @param product_id 商品编号
      * @param product_name 商品名
      * @param publisher_id 发布者id
      * @param description 描述
+     * @param price 价格
      * @return true代表发布成功，false代表发布失败
      */
-    public static boolean addProduct(int product_id, String product_name,
-                                  String publisher_id, String description) {
-        return true;
+    public static boolean addProduct(String product_name,
+                                  String publisher_id, String description, double price) throws SQLException {
+        Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+        String sql = "insert into products values(null,?,?,?,?,0)";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setString(1, product_name);
+        ps.setString(2, publisher_id);
+        ps.setString(3, description);
+        ps.setDouble(4, price);
+
+        try {
+            ps.executeUpdate();
+            return true;
+        } catch(SQLException e) {
+            return false;
+        } finally {
+            conn.close();
+            ps.close();
+        }
     }
 }
