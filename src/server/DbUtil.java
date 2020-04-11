@@ -155,17 +155,52 @@ public class DbUtil {
     }
 
     /**
-     * TODO 购买商品
+     * 购买商品
      * @param buyer_id 购买者的id
      * @param product_id 商品id
      * @return true代表购买成功，false代表购买失败
      */
-    public static boolean buyProduct(String buyer_id, String product_id)
+    public static boolean buyProduct(String buyer_id, int product_id)
             throws SQLException {
         Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
-        // TODO 先查询商品是否已经被购买，如果是，返回false，
-        // TODO 否则将商品的bought改为1，并往purchase_history表中添加一条购买记录
-        return true;
+
+        // 查询语句，查询商品是否已经被购买的命令
+        String queryCommand = "SELECT bought FROM products WHERE product_id=?";
+        // 将商品设置为已经被购买的命令
+        String updateCommand = "UPDATE products SET bought=1 WHERE product_id=?";
+        // 插入一条购买记录的命令
+        String insertCommand = "INSERT INTO purchase_history values(NULL,?,?)";
+
+        PreparedStatement ps = conn.prepareStatement(queryCommand);
+        ps.setInt(1, product_id);
+        ResultSet result = null;
+
+        try {
+            // 先查询商品是否已经被购买，如果是，返回false，
+            result = ps.executeQuery();
+            int bought = result.getInt(1);
+            if(bought == 1) {
+                return false;
+            }
+            else {
+                // 否则将bought属性设置为1，并添加一条购买记录
+                ps = conn.prepareStatement(updateCommand);
+                ps.setInt(1,product_id);
+                ps.executeUpdate();
+
+                ps = conn.prepareStatement(insertCommand);
+                ps.setString(1, buyer_id);
+                ps.setInt(2, product_id);
+                ps.executeUpdate();
+                return true;
+            }
+        } catch(SQLException e) {
+            return false;
+        } finally {
+            conn.close();
+            result.close();
+            ps.close();
+        }
     }
 
     /**
