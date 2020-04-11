@@ -178,6 +178,7 @@ public class DbUtil {
         try {
             // 先查询商品是否已经被购买，如果是，返回false，
             result = ps.executeQuery();
+            result.last();
             int bought = result.getInt(1);
             if(bought == 1) {
                 return false;
@@ -204,7 +205,7 @@ public class DbUtil {
     }
 
     /**
-     * TODO 删除商品
+     * 删除商品
      * @param product_id 被删除的商品id
      * @return true代表删除成功，false代表失败
      */
