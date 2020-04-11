@@ -1,21 +1,24 @@
 package server.threads;
 
+import server.DbUtil;
+
 import java.io.*;
 import java.net.Socket;
+import java.sql.SQLException;
 
 /**
  * 登录线程
  */
 public class LoginThread extends Thread {
-    private Socket socket;
+    private Socket client;
 
     /**
      * 构造方法
-     * @param socket 输入账号密码的socket
+     * @param client 输入账号密码的socket
      */
-    public LoginThread(Socket socket) {
+    public LoginThread(Socket client) {
         // 开启新线程
-        this.socket = socket;
+        this.client = client;
     }
 
     // 启动线程，响应客户端请求
@@ -24,11 +27,11 @@ public class LoginThread extends Thread {
         try {
 
             BufferedReader br = new BufferedReader(new InputStreamReader(
-                    socket.getInputStream()
+                    client.getInputStream()
             ));
 
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
-                    socket.getOutputStream()
+                    client.getOutputStream()
             ));
             PrintWriter pw = new PrintWriter(bw, true);
 
@@ -38,9 +41,12 @@ public class LoginThread extends Thread {
             String password = br.readLine();
 
             // TODO 让用户名和密码比对
+            if(DbUtil.idMatch(account_id, password)) {
+
+            }
 
 
-        } catch (IOException e) {
+        } catch (IOException | SQLException e) {
             e.printStackTrace();
         }
     }
