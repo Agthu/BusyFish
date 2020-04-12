@@ -1,9 +1,12 @@
 package client.data;
 
+import java.io.Serializable;
+
 /**
  * 用户类，用于传输对象
  */
-public class User {
+public class User implements Serializable {
+    public static final long serialVersionUID = 1L;
     private String id;
     private String name;
     private String password;
