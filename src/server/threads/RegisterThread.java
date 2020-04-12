@@ -1,5 +1,6 @@
 package server.threads;
 
+import client.data.User;
 import server.DbUtil;
 
 import java.io.*;
@@ -18,28 +19,30 @@ public class RegisterThread extends Thread {
 
     @Override
     public void run() {
+
+        OutputStream os;
+        PrintWriter pw;
         try {
-            // 接受来自客户端的信息
-            BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(socket.getInputStream()));
+            InputStream is = socket.getInputStream();
+            ObjectInputStream ois = new ObjectInputStream(is);
 
-            // 用于发送注册成功信息
-            PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
+            // 获取客户端传来的User对象
+            User user = (User)ois.readObject();
+            // 关闭输入流
+            socket.shutdownInput();
 
-            // 接收用户名、昵称、密码
-            String id = reader.readLine();
-            String name = reader.readLine();
-            String password = reader.readLine();
+            os = socket.getOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(os);
 
-            // 注册成功/失败时，向客户端发送提示信息
-            if(DbUtil.createAccount(id, name, password)) {
-                writer.println(SUCCESS_MSG);
-            } else {
-                writer.println(FAIL_MSG);
+            // 如果创建成功，则向客户端发送成功提示
+            if(DbUtil.createAccount(user.getId(), user.getName(), user.getPassword())) {
+
             }
+            else {
 
-            socket.close();
-        } catch (IOException | SQLException e) {
+            }
+            
+        } catch (IOException | ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
     }
