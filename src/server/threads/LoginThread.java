@@ -1,6 +1,8 @@
 package server.threads;
 
 import server.DbUtil;
+import server.data.Hint;
+import server.data.User;
 
 import java.io.*;
 import java.net.Socket;
@@ -11,8 +13,8 @@ import java.sql.SQLException;
  */
 public class LoginThread extends Thread {
     private Socket client;
-    public static final String SUCCESS_MSG = "Login succeeded";
-    public static final String FAIL_MSG = "Login failed";
+    public static final Hint SUCCESS_HINT = new Hint(true); // 成功的提示信息
+    public static final Hint FAIL_HINT = new Hint(false); // 失败的提示信息
 
     /**
      * 构造方法
@@ -26,35 +28,31 @@ public class LoginThread extends Thread {
     // 启动线程，响应客户端请求
     @Override
     public void run() {
-        BufferedReader br = null;
-        BufferedWriter bw = null;
-        PrintWriter pw = null;
+
         try {
 
-            br = new BufferedReader(new InputStreamReader(
-                    client.getInputStream()));
+            ObjectInputStream ois = new ObjectInputStream(
+                    client.getInputStream()
+            );
+            ObjectOutputStream oos = new ObjectOutputStream(
+                    client.getOutputStream()
+            );
 
-            bw = new BufferedWriter(new OutputStreamWriter(
-                    client.getOutputStream()));
-
-            pw = new PrintWriter(bw, true);
-
-            // 读取客户端传来的用户名
-            String account_id = br.readLine();
-            // 读取客户端传来的密码
-            String password = br.readLine();
+            // 读取客户端传来的用户信息
+            User user = (User)ois.readObject();
+            client.shutdownInput();
 
             // 让用户名和密码比对
-            if(DbUtil.idMatch(account_id, password)) {
+            if(DbUtil.idMatch(user.getId(), user.getPassword())) {
                 // 密码正确，则发送登录成功提示，并开启一个新线程
-                pw.println(SUCCESS_MSG);
+                oos.writeObject(SUCCESS_HINT);
                 new UserThread(client).start();
             } else {
-                pw.println(FAIL_MSG);
+                oos.writeObject(FAIL_HINT);
             }
-        } catch (IOException | SQLException e) {
+            client.shutdownOutput();
+        } catch (IOException | SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-            pw.println(FAIL_MSG);
         }
     }
 }
