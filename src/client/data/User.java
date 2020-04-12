@@ -1,4 +1,4 @@
-package server.data;
+package client.data;
 
 /**
  * 用户类，用于传输对象
