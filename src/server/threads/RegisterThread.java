@@ -1,6 +1,7 @@
 package server.threads;
 
-import client.data.User;
+import server.data.Hint;
+import server.data.User;
 import server.DbUtil;
 
 import java.io.*;
@@ -10,8 +11,8 @@ import java.sql.SQLException;
 public class RegisterThread extends Thread {
 
     private Socket socket;
-    public static final String SUCCESS_MSG = "Register succeeded"; // 成功的提示信息
-    public static final String FAIL_MSG = "Register failed"; // 失败的提示信息
+    public static final Hint SUCCESS_HINT = new Hint(true); // 成功的提示信息
+    public static final Hint FAIL_HINT = new Hint(false); // 失败的提示信息
 
     public RegisterThread(Socket socket) {
         this.socket = socket;
@@ -21,7 +22,6 @@ public class RegisterThread extends Thread {
     public void run() {
 
         OutputStream os;
-        PrintWriter pw;
         try {
             InputStream is = socket.getInputStream();
             ObjectInputStream ois = new ObjectInputStream(is);
@@ -36,12 +36,12 @@ public class RegisterThread extends Thread {
 
             // 如果创建成功，则向客户端发送成功提示
             if(DbUtil.createAccount(user.getId(), user.getName(), user.getPassword())) {
-
+                oos.writeObject(SUCCESS_HINT);
             }
             else {
-
+                oos.writeObject(FAIL_HINT);
             }
-            
+
         } catch (IOException | ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }

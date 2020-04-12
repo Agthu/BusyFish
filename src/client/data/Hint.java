@@ -4,6 +4,7 @@ package client.data;
  * 该类用于发送请求成功的提示信息，如注册成功与否等
  */
 public class Hint {
+    public static final long serialVersionUID = 1L;
     private boolean success;
     public Hint(boolean success) {
         this.success = success;
