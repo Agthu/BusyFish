@@ -1,5 +1,10 @@
 package server.threads;
 
+import data.Request;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 /**
@@ -21,6 +26,27 @@ public class UserThread extends Thread {
 
     @Override
     public void run() {
+        ObjectOutputStream oos = null;
+        ObjectInputStream ois = null;
+        try {
+            oos = new ObjectOutputStream(client.getOutputStream());
+            ois = new ObjectInputStream(client.getInputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+
+        while(true) {
+            try {
+                // 接收一个请求对象
+                Request request = (Request)ois.readObject();
+
+                // TODO 判断请求类型
+
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 }

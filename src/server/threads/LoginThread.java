@@ -30,7 +30,7 @@ public class LoginThread extends Thread {
     public void run() {
 
         try {
-            // 先创建输出流对象，再创建输入流对象，才不会报错
+            // 先创建输出流对象，再创建输入流对象，否则会报错
             ObjectOutputStream oos = new ObjectOutputStream(
                     client.getOutputStream()
             );
