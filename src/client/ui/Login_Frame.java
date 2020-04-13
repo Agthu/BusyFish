@@ -1,7 +1,7 @@
 package client.ui;
 
-import client.data.Hint;
-import client.data.User;
+import data.Hint;
+import data.User;
 import client.ui.Bstyle.BButton;
 import client.ui.Bstyle.BFrame;
 import client.ui.Bstyle.BPasswordField;
@@ -98,6 +98,7 @@ public class Login_Frame extends BFrame {
                     Hint hint = (Hint)ois.readObject();
                     if(hint.isSuccess()) {
                         System.out.println("成功");
+                        // TODO 进入主界面
                     }
                 } catch (IOException | ClassNotFoundException ioException) {
                     ioException.printStackTrace();

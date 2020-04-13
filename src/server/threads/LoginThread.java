@@ -1,8 +1,8 @@
 package server.threads;
 
 import server.DbUtil;
-import server.data.Hint;
-import server.data.User;
+import data.Hint;
+import data.User;
 
 import java.io.*;
 import java.net.Socket;
@@ -30,13 +30,14 @@ public class LoginThread extends Thread {
     public void run() {
 
         try {
-
-            ObjectInputStream ois = new ObjectInputStream(
-                    client.getInputStream()
-            );
+            // 先创建输出流对象，再创建输入流对象，才不会报错
             ObjectOutputStream oos = new ObjectOutputStream(
                     client.getOutputStream()
             );
+            ObjectInputStream ois = new ObjectInputStream(
+                    client.getInputStream()
+            );
+
 
             // 读取客户端传来的用户信息
             User user = (User)ois.readObject();

@@ -1,7 +1,7 @@
 package server.threads;
 
-import server.data.Hint;
-import server.data.User;
+import data.Hint;
+import data.User;
 import server.DbUtil;
 
 import java.io.*;
