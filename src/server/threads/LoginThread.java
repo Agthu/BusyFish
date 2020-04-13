@@ -46,7 +46,7 @@ public class LoginThread extends Thread {
             if(DbUtil.idMatch(user.getId(), user.getPassword())) {
                 // 密码正确，则发送登录成功提示，并开启一个新线程
                 oos.writeObject(SUCCESS_HINT);
-                new UserThread(client).start();
+                new UserThread(client, user.getId()).start();
             } else {
                 oos.writeObject(FAIL_HINT);
             }
