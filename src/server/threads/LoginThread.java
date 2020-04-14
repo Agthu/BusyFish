@@ -13,7 +13,7 @@ import java.sql.SQLException;
  * @author Lian Guan
  */
 public class LoginThread extends Thread {
-    private Socket client;
+    private final Socket client;
     /**
      * 成功提示信息
      */
@@ -33,7 +33,9 @@ public class LoginThread extends Thread {
         this.client = client;
     }
 
-    // 启动线程，响应客户端请求
+    /**
+     * 启动线程，相应客户端需求
+     */
     @Override
     public void run() {
 
@@ -46,16 +48,17 @@ public class LoginThread extends Thread {
                     client.getInputStream()
             );
 
-
             // 读取客户端传来的用户信息
             User user = (User)ois.readObject();
             client.shutdownInput();
 
             // 让用户名和密码比对
             if(DbUtil.idMatch(user.getId(), user.getPassword())) {
+
                 // 密码正确，则发送登录成功提示，并开启一个新线程
                 oos.writeObject(SUCCESS_HINT);
                 new UserThread(client, user.getId()).start();
+
             } else {
                 oos.writeObject(FAIL_HINT);
             }

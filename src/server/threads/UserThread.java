@@ -11,17 +11,17 @@ import java.net.Socket;
  * 正式服务线程，处理一系列用户请求
  */
 public class UserThread extends Thread {
-    private Socket client;
-    private String account_id;
+    private final Socket client;
+    private String accountId;
 
     /**
      * 构造方法
      * @param client 客户端的socket
-     * @param account_id 当前客户端用户的id
+     * @param accountId 当前客户端用户的id
      */
-    public UserThread(Socket client, String account_id) {
+    public UserThread(Socket client, String accountId) {
         this.client = client;
-        this.account_id = account_id;
+        this.accountId = accountId;
     }
 
     @Override
@@ -45,7 +45,6 @@ public class UserThread extends Thread {
                 Request.RequestType requestType = request.getRequestType();
                 switch(requestType) {
                     case GET_PRO_BY_ID:
-
                 }
 
             } catch (IOException | ClassNotFoundException e) {
