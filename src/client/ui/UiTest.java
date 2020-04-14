@@ -1,8 +1,11 @@
 package client.ui;
 
+/**
+ * @author Lian Guan
+ */
 public class UiTest {
     public static void main(String[] args) {
-        Login_Frame lf = new Login_Frame();
+        LoginFrame lf = new LoginFrame();
         lf.setVisible(true);
     }
 }

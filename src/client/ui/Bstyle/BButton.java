@@ -6,6 +6,7 @@ import java.awt.event.MouseListener;
 
 /**
  * 全局按钮样式
+ * @author Lian Guan
  */
 public class BButton extends JButton implements MouseListener {
 

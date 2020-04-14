@@ -5,6 +5,7 @@ import java.awt.*;
 
 /**
  * 本类专门存储项目中用到的所有颜色
+ * @author Lian Guan
  */
 public final class BColor { // final修饰防止被继承
 

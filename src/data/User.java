@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * 用户类，用于传输对象
+ * @author Lian Guan
  */
 public class User implements Serializable {
     public static final long serialVersionUID = 1L;

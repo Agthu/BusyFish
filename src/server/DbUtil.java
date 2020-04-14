@@ -28,7 +28,10 @@ import java.sql.*;
  * 数据库的通用工具类
  */
 public class DbUtil {
-    // MySQL 8.0 以上版本 - JDBC 驱动名及数据库 URL
+
+    /**
+     * @var JDBC_DRIVER
+     */
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String DB_URL =
             "jdbc:mysql://localhost:3306/busyfish?useSSL=false" +
@@ -112,7 +115,9 @@ public class DbUtil {
             if(result.getRow() == 1) { // 如果当前的行数为1
                 passwordQueried = result.getString(1);
             }
-            else return false; // 如果行数为0则账号不存在
+            else {
+                return false; // 如果行数为0则账号不存在
+            }
         } catch(SQLException e) {
             e.printStackTrace();
         } finally {

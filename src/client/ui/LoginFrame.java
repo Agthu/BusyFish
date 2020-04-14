@@ -13,25 +13,48 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.Arrays;
 
 /**
  * 登陆窗口
+ * @author Lian Guan
  * @see BFrame
  */
-public class Login_Frame extends BFrame {
+public class LoginFrame extends BFrame {
 
-    private JFrame loginFrame; // 登陆窗口的引用
-    private Container container; // 窗口容器的引用
-    private JTextField idField; // 账号输入框的引用
-    private JPasswordField passwordField; // 密码输入框的引用
-    private JButton loginButton; // 登陆按钮的引用
-    private JButton registerButton; // 注册按钮的引用
+    /**
+     * 登录窗口的引用
+     */
+    private JFrame loginFrame;
+
+    /**
+     * 窗口容器的引用
+     */
+    private Container container;
+
+    /**
+     * 账号输入框的引用
+     */
+    private JTextField idField;
+
+    /**
+     * 密码输入框的引用
+     */
+    private JPasswordField passwordField;
+
+    /**
+     * 登陆按钮的引用
+     */
+    private JButton loginButton;
+
+    /**
+     * 注册按钮的引用
+     */
+    private JButton registerButton;
 
     public static final String HOST = "127.0.0.1";
     public static final int LOGIN_PORT = 9811;
 
-    public Login_Frame() {
+    public LoginFrame() {
         // 重命名窗口
         super("登陆");
 
@@ -50,11 +73,15 @@ public class Login_Frame extends BFrame {
         container.setLayout(new FlowLayout(FlowLayout.CENTER));
         JPanel textFieldPanel = new JPanel(new FlowLayout());
         textFieldPanel.setSize(280, 50);
-        textFieldPanel.add(idField = new Input_Id());
-        textFieldPanel.add(passwordField = new Input_Password());
+        textFieldPanel.add(idField = new InputId());
+        textFieldPanel.add(passwordField = new InputPassword());
         container.add(textFieldPanel);
-        container.add(loginButton = new Login_Button()); // 添加登陆按钮
-        container.add(registerButton = new Register_Button());//添加注册按钮
+
+        // 添加登录按钮
+        container.add(loginButton = new LoginButton());
+
+        // 添加注册按钮
+        container.add(registerButton = new RegisterButton());
 
         // 不可拖动窗口边缘来改变大小
         this.setResizable(false);
@@ -70,11 +97,19 @@ public class Login_Frame extends BFrame {
     }
 
     /**
+     * 获取注册按钮
+     * @return 注册按钮的引用
+     */
+    public JButton getRegisterButton() {
+        return registerButton;
+    }
+
+    /**
      * 登陆按钮
      * @see BButton
      */
-    class Login_Button extends BButton {
-        Login_Button() {
+    class LoginButton extends BButton {
+        LoginButton() {
             super("登录");
 
             this.addActionListener(e -> {
@@ -112,8 +147,8 @@ public class Login_Frame extends BFrame {
      * 注册按钮
      * @see BButton
      */
-    class Register_Button extends BButton {
-        Register_Button() {
+    class RegisterButton extends BButton {
+        RegisterButton() {
             super("注册");
 
             this.addActionListener(e -> {
@@ -129,8 +164,8 @@ public class Login_Frame extends BFrame {
  * 账号输入框
  * @see BTextField
  */
-class Input_Id extends BTextField {
-    Input_Id() {
+class InputId extends BTextField {
+    InputId() {
         super("请输入账号");
     }
 }
@@ -139,8 +174,8 @@ class Input_Id extends BTextField {
  * 密码输入框
  * @see BPasswordField
  */
-class Input_Password extends BPasswordField {
-    Input_Password() {
+class InputPassword extends BPasswordField {
+    InputPassword() {
         super("请输入密码");
     }
 }
