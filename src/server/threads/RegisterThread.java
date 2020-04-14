@@ -11,8 +11,16 @@ import java.sql.SQLException;
 public class RegisterThread extends Thread {
 
     private Socket socket;
-    public static final Hint SUCCESS_HINT = new Hint(true); // 成功的提示信息
-    public static final Hint FAIL_HINT = new Hint(false); // 失败的提示信息
+
+    /**
+     * 成功提示信息
+     */
+    public static final Hint SUCCESS_HINT = new Hint(true);
+
+    /**
+     * 失败提示信息
+     */
+    public static final Hint FAIL_HINT = new Hint(false);
 
     public RegisterThread(Socket socket) {
         this.socket = socket;

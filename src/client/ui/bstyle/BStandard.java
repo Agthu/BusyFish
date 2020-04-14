@@ -1,4 +1,4 @@
-package client.ui.Bstyle;
+package client.ui.bstyle;
 
 /**
  * 本类存储一些标准规范，比如文字大小等。

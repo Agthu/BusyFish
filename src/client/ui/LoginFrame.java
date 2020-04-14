@@ -2,10 +2,10 @@ package client.ui;
 
 import data.Hint;
 import data.User;
-import client.ui.Bstyle.BButton;
-import client.ui.Bstyle.BFrame;
-import client.ui.Bstyle.BPasswordField;
-import client.ui.Bstyle.BTextField;
+import client.ui.bstyle.BButton;
+import client.ui.bstyle.BFrame;
+import client.ui.bstyle.BPasswordField;
+import client.ui.bstyle.BTextField;
 
 import javax.swing.*;
 import java.awt.*;

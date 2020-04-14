@@ -10,11 +10,19 @@ import java.sql.SQLException;
 
 /**
  * 登录线程
+ * @author Lian Guan
  */
 public class LoginThread extends Thread {
     private Socket client;
-    public static final Hint SUCCESS_HINT = new Hint(true); // 成功的提示信息
-    public static final Hint FAIL_HINT = new Hint(false); // 失败的提示信息
+    /**
+     * 成功提示信息
+     */
+    public static final Hint SUCCESS_HINT = new Hint(true);
+
+    /**
+     * 失败提示信息
+     */
+    public static final Hint FAIL_HINT = new Hint(false);
 
     /**
      * 构造方法

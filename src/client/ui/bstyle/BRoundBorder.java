@@ -1,4 +1,4 @@
-package client.ui.Bstyle;
+package client.ui.bstyle;
 
 import javax.swing.border.Border;
 import java.awt.*;
