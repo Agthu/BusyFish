@@ -42,6 +42,11 @@ public class UserThread extends Thread {
                 Request request = (Request)ois.readObject();
 
                 // TODO 判断请求类型
+                Request.RequestType requestType = request.getRequestType();
+                switch(requestType) {
+                    case GET_PRO_BY_ID:
+
+                }
 
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
