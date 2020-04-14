@@ -22,6 +22,8 @@
 
 package server;
 
+import data.Product;
+
 import java.sql.*;
 
 /**
@@ -52,6 +54,15 @@ public class DbUtil {
     }
 
     /**
+     * 获取数据库连接
+     * @return 数据库连接
+     * @throws SQLException 连接异常
+     */
+    private static Connection getDatabaseConnection() throws SQLException {
+        return DriverManager.getConnection(DB_URL, USER, PASSWORD);
+    }
+
+    /**
      * 注册账号
      * @param account_id 用户名
      * @param account_name 昵称
@@ -62,14 +73,14 @@ public class DbUtil {
                                         String account_password) throws SQLException {
 
         // 建立数据库连接
-        Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+        Connection database = getDatabaseConnection();
 
         // 具体的命令，在accounts这个表中添加一条数据
         String sql = "insert into accounts(account_id,account_name,account_password)" +
                 " values(?,?,?) ";
 
         // PreparedStatement对象可以防止sql注入
-        PreparedStatement ps = conn.prepareStatement(sql);
+        PreparedStatement ps = database.prepareStatement(sql);
         ps.setString(1, account_id);
         ps.setString(2, account_name);
         ps.setString(3, account_password);
@@ -82,7 +93,7 @@ public class DbUtil {
             return false;
         } finally {
             // 关闭连接，释放资源
-            conn.close();
+            database.close();
             ps.close();
         }
     }
@@ -96,13 +107,13 @@ public class DbUtil {
     public static boolean idMatch(
             String account_id, String account_password) throws SQLException {
         // 取得连接
-        Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+        Connection database = getDatabaseConnection();
 
         // sql查询语句
         String sql = "select account_password from accounts where account_id=?";
 
         // 创建PreparedStatement对象
-        PreparedStatement ps = conn.prepareStatement(sql);
+        PreparedStatement ps = database.prepareStatement(sql);
         ps.setString(1, account_id);
 
         ResultSet result = null;
@@ -121,7 +132,7 @@ public class DbUtil {
         } catch(SQLException e) {
             e.printStackTrace();
         } finally {
-            conn.close();
+            database.close();
             ps.close();
             result.close();
         }
@@ -138,11 +149,11 @@ public class DbUtil {
      */
     public static boolean addProduct(String product_name, String publisher_id,
                                      String description, double price) throws SQLException {
-        Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+        Connection database = getDatabaseConnection();
 
         // 插入语句
         String sql = "insert into products values(null,?,?,?,?,0)";
-        PreparedStatement ps = conn.prepareStatement(sql);
+        PreparedStatement ps = database.prepareStatement(sql);
         ps.setString(1, product_name); // 商品名称
         ps.setString(2, publisher_id); // 发布者id
         ps.setString(3, description); // 商品描述
@@ -154,7 +165,7 @@ public class DbUtil {
         } catch(SQLException e) {
             return false; // 失败时返回false
         } finally {
-            conn.close();
+            database.close();
             ps.close();
         }
     }
@@ -167,7 +178,7 @@ public class DbUtil {
      */
     public static boolean buyProduct(String buyer_id, int product_id)
             throws SQLException {
-        Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+        Connection database = getDatabaseConnection();
 
         // 查询语句，查询商品是否已经被购买的命令
         String queryCommand = "SELECT bought FROM products WHERE product_id=?";
@@ -176,7 +187,7 @@ public class DbUtil {
         // 插入一条购买记录的命令
         String insertCommand = "INSERT INTO purchase_history values(NULL,?,?)";
 
-        PreparedStatement ps = conn.prepareStatement(queryCommand);
+        PreparedStatement ps = database.prepareStatement(queryCommand);
         ps.setInt(1, product_id);
         ResultSet result = null;
 
@@ -190,11 +201,11 @@ public class DbUtil {
             }
             else {
                 // 否则将bought属性设置为1，并添加一条购买记录
-                ps = conn.prepareStatement(updateCommand);
+                ps = database.prepareStatement(updateCommand);
                 ps.setInt(1,product_id);
                 ps.executeUpdate();
 
-                ps = conn.prepareStatement(insertCommand);
+                ps = database.prepareStatement(insertCommand);
                 ps.setString(1, buyer_id);
                 ps.setInt(2, product_id);
                 ps.executeUpdate();
@@ -203,7 +214,7 @@ public class DbUtil {
         } catch(SQLException e) {
             return false;
         } finally {
-            conn.close();
+            database.close();
             result.close();
             ps.close();
         }
@@ -215,10 +226,10 @@ public class DbUtil {
      * @return true代表删除成功，false代表失败
      */
     public static boolean deleteProduct(int product_id) throws SQLException {
-        Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+        Connection database = getDatabaseConnection();
 
         String sql = "delete from products where product_id=?";
-        PreparedStatement ps = conn.prepareStatement(sql);
+        PreparedStatement ps = database.prepareStatement(sql);
         ps.setInt(1, product_id);
         try {
             ps.executeUpdate(); // 执行删除命令
@@ -226,9 +237,45 @@ public class DbUtil {
         } catch(SQLException e) {
             return false;
         } finally {
-            conn.close();
+            database.close();
             ps.close();
         }
 
     }
+
+    /**
+     * 根据id获取商品信息
+     * @param id 商品id
+     * @return 商品信息
+     */
+    public static Product getProductById(int id) throws SQLException {
+        Connection database = getDatabaseConnection();
+
+        // 数据库查询语句
+        String sql = "SELECT * FROM products WHERE product_id=?";
+        PreparedStatement ps = database.prepareStatement(sql);
+        ps.setInt(1, id);
+
+        // 查询结果的引用
+        ResultSet result = null;
+        try {
+            result = ps.executeQuery();
+            result.last();
+            return new Product(
+                    result.getInt("product_id"),
+                    result.getString("product_name"),
+                    result.getString("publisher_id"),
+                    result.getString("product_description"),
+                    result.getDouble("product_price"),
+                    result.getInt("bought")
+            );
+        } catch(SQLException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            database.close();
+            ps.close();
+        }
+    }
+
 }
