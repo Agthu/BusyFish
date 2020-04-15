@@ -1,12 +1,14 @@
 /*
 数据库名：busyfish
 所有的数据表：
-    表名：accounts 字段名/类型/描述：
+    表名：accounts
+        字段名/类型/描述：
         account_id / VARCHAR(30) / 用户名（主键）
         account_name / VARCHAR(50) / 昵称
         account_password / VARCHAR(30) / 密码
 
-    表名：products 字段名/类型/描述
+    表名：products
+        字段名/类型/描述
         product_id / INT / 商品编号(自动增长,)
         product_name / VARCHAR(50) / 商品名称
         publisher_id / VARCHAR(30) / 发布者id
@@ -14,7 +16,8 @@
         product_price / DECIMAL(10,2) / 价格
         bought / tinyint / 是否已被购买
 
-    表名：purchase_history 字段名/类型/描述
+    表名：purchase_history
+        字段名/类型/描述
         record_id / INT / 记录编号
         buyer_id / VARCHAR(30) / 买家id
         product_id / INT / 商品编号
@@ -121,13 +124,17 @@ public class DbUtil {
         try {
             // executeQuery()函数执行查询操作
             result = ps.executeQuery();
+
             // result指向最后一行（查询到的数据最多只有一行）
             result.last();
-            if(result.getRow() == 1) { // 如果当前的行数为1
+
+            // 如果当前的行数为1
+            if(result.getRow() == 1) {
                 passwordQueried = result.getString(1);
             }
             else {
-                return false; // 如果行数为0则账号不存在
+                // 如果行数为0则账号不存在
+                return false;
             }
         } catch(SQLException e) {
             e.printStackTrace();
@@ -154,29 +161,32 @@ public class DbUtil {
         // 插入语句
         String sql = "insert into products values(null,?,?,?,?,0)";
         PreparedStatement ps = database.prepareStatement(sql);
-        ps.setString(1, product_name); // 商品名称
-        ps.setString(2, publisher_id); // 发布者id
-        ps.setString(3, description); // 商品描述
-        ps.setDouble(4, price); // 价格
+        ps.setString(1, product_name);
+        ps.setString(2, publisher_id);
+        ps.setString(3, description);
+        ps.setDouble(4, price);
 
         try {
             ps.executeUpdate();
-            return true; // 添加成功时返回true
+            // 添加成功时返回true
+            return true;
         } catch(SQLException e) {
-            return false; // 失败时返回false
+            // 失败时返回false
+            return false;
         } finally {
             database.close();
             ps.close();
         }
     }
 
+
     /**
      * 购买商品
-     * @param buyer_id 购买者的id
-     * @param product_id 商品id
+     * @param buyerId 购买者的id
+     * @param productId 商品id
      * @return true代表购买成功，false代表购买失败
      */
-    public static boolean buyProduct(String buyer_id, int product_id)
+    public static boolean buyProduct(String buyerId, int productId)
             throws SQLException {
         Connection database = getDatabaseConnection();
 
@@ -188,12 +198,13 @@ public class DbUtil {
         String insertCommand = "INSERT INTO purchase_history values(NULL,?,?)";
 
         PreparedStatement ps = database.prepareStatement(queryCommand);
-        ps.setInt(1, product_id);
+        ps.setInt(1, productId);
         ResultSet result = null;
 
         try {
             // 先查询商品是否已经被购买，如果是，返回false，
             result = ps.executeQuery();
+            // 使result指向最后一行（一开始并不指向任何一行）
             result.last();
             int bought = result.getInt(1);
             if(bought == 1) {
@@ -202,12 +213,12 @@ public class DbUtil {
             else {
                 // 否则将bought属性设置为1，并添加一条购买记录
                 ps = database.prepareStatement(updateCommand);
-                ps.setInt(1,product_id);
+                ps.setInt(1,productId);
                 ps.executeUpdate();
 
                 ps = database.prepareStatement(insertCommand);
-                ps.setString(1, buyer_id);
-                ps.setInt(2, product_id);
+                ps.setString(1, buyerId);
+                ps.setInt(2, productId);
                 ps.executeUpdate();
                 return true;
             }
@@ -222,17 +233,18 @@ public class DbUtil {
 
     /**
      * 删除商品
-     * @param product_id 被删除的商品id
+     * @param productId 被删除的商品id
      * @return true代表删除成功，false代表失败
      */
-    public static boolean deleteProduct(int product_id) throws SQLException {
+    public static boolean deleteProduct(int productId) throws SQLException {
         Connection database = getDatabaseConnection();
 
         String sql = "delete from products where product_id=?";
         PreparedStatement ps = database.prepareStatement(sql);
-        ps.setInt(1, product_id);
+        ps.setInt(1, productId);
         try {
-            ps.executeUpdate(); // 执行删除命令
+            // 执行删除命令
+            ps.executeUpdate();
             return true;
         } catch(SQLException e) {
             return false;
