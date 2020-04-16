@@ -28,6 +28,8 @@ package server;
 import data.Product;
 
 import java.sql.*;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * 数据库的通用工具类
@@ -291,4 +293,47 @@ public class DbUtil {
         }
     }
 
+    /**
+     * TODO 获取最新商品
+     * @return 最新商品的数组
+     */
+    public static LinkedList<Product> getNewProducts() throws SQLException {
+        Connection database = getDatabaseConnection();
+
+        // 存放商品信息的数据结构
+        LinkedList<Product> proList = new LinkedList<>();
+
+        // 查询语句，查询前n条记录
+        String queryCommand = "SELECT * FROM products WHERE bought=0 " +
+                "LIMIT ?,?";
+        PreparedStatement ps = database.prepareStatement(queryCommand);
+        ps.setInt(1, 0);
+        ps.setInt(2, 30);
+
+        ResultSet result;
+
+        try {
+            result = ps.executeQuery();
+
+            // 遍历结果集中的所有记录
+            while(result.next()) {
+                // 根据记录向proList中添加一个新的商品
+                proList.add(new Product(
+                        result.getInt("product_id"),
+                        result.getString("product_name"),
+                        result.getString("publisher_id"),
+                        result.getString("product_description"),
+                        result.getDouble("product_price"),
+                        result.getInt("bought")
+                ));
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            database.close();
+            ps.close();
+        }
+        return proList;
+    }
 }

@@ -39,6 +39,15 @@ public class Product implements Serializable {
      */
     private int bought;
 
+    /**
+     * 构造方法
+     * @param id 商品id
+     * @param name 商品名称
+     * @param publisherId 发布者id
+     * @param description 描述
+     * @param price 价格
+     * @param bought 是否被购买（1为是）
+     */
     public Product(int id, String name, String publisherId, String description, double price, int bought) {
         this.id = id;
         this.name = name;
