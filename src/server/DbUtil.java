@@ -42,7 +42,9 @@ public class DbUtil {
             "jdbc:mysql://localhost:3306/busyfish?useSSL=false" +
                     "&serverTimezone=UTC&allowPublicKeyRetrieval=true";
 
-    // 数据库的用户名与密码
+    /**
+     * 数据库的用户名和密码
+     */
     private static final String USER = "root";
     private static final String PASSWORD = "20010806123";
 
@@ -67,13 +69,13 @@ public class DbUtil {
 
     /**
      * 注册账号
-     * @param account_id 用户名
-     * @param account_name 昵称
-     * @param account_password 密码
+     * @param accountId 用户名
+     * @param accountName 昵称
+     * @param accountPassword 密码
      * @return true代表注册成功，false代表注册失败
      */
-    public static boolean createAccount(String account_id, String account_name,
-                                        String account_password) throws SQLException {
+    public static boolean createAccount(String accountId, String accountName,
+                                        String accountPassword) throws SQLException {
 
         // 建立数据库连接
         Connection database = getDatabaseConnection();
@@ -84,9 +86,9 @@ public class DbUtil {
 
         // PreparedStatement对象可以防止sql注入
         PreparedStatement ps = database.prepareStatement(sql);
-        ps.setString(1, account_id);
-        ps.setString(2, account_name);
-        ps.setString(3, account_password);
+        ps.setString(1, accountId);
+        ps.setString(2, accountName);
+        ps.setString(3, accountPassword);
 
         try {
             // executeUpdate()函数执行增删改操作，返回更新的行数
@@ -103,12 +105,12 @@ public class DbUtil {
 
     /**
      * 检测用户名和密码是否匹配
-     * @param account_id 被检测的用户名
-     * @param account_password 被检测的密码
+     * @param accountId 被检测的用户名
+     * @param accountPassword 被检测的密码
      * @return true代表匹配，false代表不匹配(用户不存在或密码错误)
      */
     public static boolean idMatch(
-            String account_id, String account_password) throws SQLException {
+            String accountId, String accountPassword) throws SQLException {
         // 取得连接
         Connection database = getDatabaseConnection();
 
@@ -117,9 +119,10 @@ public class DbUtil {
 
         // 创建PreparedStatement对象
         PreparedStatement ps = database.prepareStatement(sql);
-        ps.setString(1, account_id);
+        ps.setString(1, accountId);
 
-        ResultSet result = null;
+        ResultSet result;
+        // 查询到的正确密码
         String passwordQueried = null;
         try {
             // executeQuery()函数执行查询操作
@@ -141,28 +144,27 @@ public class DbUtil {
         } finally {
             database.close();
             ps.close();
-            result.close();
         }
-        return passwordQueried.equals(account_password);
+        return passwordQueried.equals(accountPassword);
     }
 
     /**
      * 发布商品
-     * @param product_name 商品名
-     * @param publisher_id 发布者id
+     * @param productName 商品名
+     * @param publisherId 发布者id
      * @param description 描述
      * @param price 价格
      * @return true代表发布成功，false代表发布失败
      */
-    public static boolean addProduct(String product_name, String publisher_id,
+    public static boolean addProduct(String productName, String publisherId,
                                      String description, double price) throws SQLException {
         Connection database = getDatabaseConnection();
 
         // 插入语句
         String sql = "insert into products values(null,?,?,?,?,0)";
         PreparedStatement ps = database.prepareStatement(sql);
-        ps.setString(1, product_name);
-        ps.setString(2, publisher_id);
+        ps.setString(1, productName);
+        ps.setString(2, publisherId);
         ps.setString(3, description);
         ps.setDouble(4, price);
 
@@ -226,7 +228,6 @@ public class DbUtil {
             return false;
         } finally {
             database.close();
-            result.close();
             ps.close();
         }
     }
