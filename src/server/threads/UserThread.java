@@ -1,5 +1,6 @@
 package server.threads;
 
+import data.Product;
 import data.Request;
 
 import java.io.IOException;
@@ -9,9 +10,14 @@ import java.net.Socket;
 
 /**
  * 正式服务线程，处理一系列用户请求
+ * @author Lian Guan
  */
 public class UserThread extends Thread {
     private final Socket client;
+
+    /**
+     * 当前服务的客户端的用户ID
+     */
     private String accountId;
 
     /**
@@ -45,6 +51,7 @@ public class UserThread extends Thread {
                 Request.RequestType requestType = request.getRequestType();
                 switch(requestType) {
                     case GET_PRO_BY_ID:
+                        Product product = (Product)ois.readObject();
                 }
 
             } catch (IOException | ClassNotFoundException e) {

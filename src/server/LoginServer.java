@@ -8,12 +8,19 @@ import java.net.Socket;
 
 /**
  * 登录服务类，提供登录服务
+ * @author Lian Guan
  */
 public class LoginServer {
-    public static final int LOGIN_PORT = 9811; // 登录功能的端口
+    /**
+     * 登录功能的端口
+     */
+    public static final int LOGIN_PORT = 9811;
     private ServerSocket loginServerSocket;
 
-    // 启动服务
+    /**
+     * 启动服务
+     * @throws IOException IOException
+     */
     public void startServer() throws IOException {
         loginServerSocket = new ServerSocket(LOGIN_PORT);
 
