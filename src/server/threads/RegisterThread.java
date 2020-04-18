@@ -8,6 +8,10 @@ import java.io.*;
 import java.net.Socket;
 import java.sql.SQLException;
 
+/**
+ * 注册线程，用于处理一个客户端的注册请求
+ * @author Lian Guan
+ */
 public class RegisterThread extends Thread {
 
     private Socket socket;

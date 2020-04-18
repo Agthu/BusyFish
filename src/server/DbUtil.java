@@ -295,9 +295,10 @@ public class DbUtil {
 
     /**
      * TODO 获取最新商品
-     * @return 最新商品的数组
+     * @param num 最大商品总数
+     * @return 最新商品的链表
      */
-    public static LinkedList<Product> getNewProducts() throws SQLException {
+    public static LinkedList<Product> getNewProducts(int num) throws SQLException {
         Connection database = getDatabaseConnection();
 
         // 存放商品信息的数据结构
@@ -308,7 +309,7 @@ public class DbUtil {
                 "LIMIT ?,?";
         PreparedStatement ps = database.prepareStatement(queryCommand);
         ps.setInt(1, 0);
-        ps.setInt(2, 30);
+        ps.setInt(2, num);
 
         ResultSet result;
 
