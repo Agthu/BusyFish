@@ -57,6 +57,14 @@ public class Product implements Serializable {
         this.bought = bought;
     }
 
+    /**
+     * 构造方法，用于getProductById等请求时客户端传输对象
+     * @param id 商品id
+     */
+    public Product(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }
