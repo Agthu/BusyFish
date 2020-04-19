@@ -2,6 +2,8 @@ package server.threads;
 
 import data.Product;
 import data.Request;
+import server.threads.userrequestthread.AddProThread;
+import server.threads.userrequestthread.SendProByIdThread;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -47,11 +49,21 @@ public class UserThread extends Thread {
                 // 接收一个请求对象
                 Request request = (Request)ois.readObject();
 
-                // TODO 判断请求类型
+                // 判断请求类型
                 Request.RequestType requestType = request.getRequestType();
                 switch(requestType) {
                     case GET_PRO_BY_ID:
                         Product product = (Product)ois.readObject();
+                        new SendProByIdThread(client, product.getId()).start();
+                        break;
+
+                    case ADD_PRO:
+                        Product detailedPro = (Product)ois.readObject();
+                        new AddProThread(client, detailedPro, accountId).start();
+                        break;
+
+                    default:
+                        break;
                 }
 
             } catch (IOException | ClassNotFoundException e) {
