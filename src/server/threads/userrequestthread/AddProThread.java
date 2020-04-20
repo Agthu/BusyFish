@@ -1,8 +1,11 @@
 package server.threads.userrequestthread;
 
+import data.Hint;
 import data.Product;
 import server.DbUtil;
 
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.sql.SQLException;
 
@@ -36,15 +39,25 @@ public class AddProThread extends AbstractUserRequestThread{
 
     @Override
     public void run() {
+        ObjectOutputStream oos;
         try {
-            DbUtil.addProduct(
-                    detailedPro.getName(),
-                    publisherId,
-                    detailedPro.getDescription(),
-                    detailedPro.getPrice()
-            );
-        } catch (SQLException e) {
+            oos = new ObjectOutputStream(getClient().getOutputStream());
+            try {
+                if(DbUtil.addProduct(
+                        detailedPro.getName(),
+                        publisherId,
+                        detailedPro.getDescription(),
+                        detailedPro.getPrice()
+                )) {
+                    oos.writeObject(new Hint(true));
+                }
+            } catch (SQLException | IOException e) {
+                oos.writeObject(new Hint(false));
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 }
