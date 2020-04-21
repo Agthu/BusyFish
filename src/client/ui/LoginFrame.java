@@ -70,18 +70,23 @@ public class LoginFrame extends BFrame {
 
         // 添加组件
         container  = this.getContentPane();
-        container.setLayout(new FlowLayout(FlowLayout.CENTER));
-        JPanel textFieldPanel = new JPanel(new FlowLayout());
+        container.setLayout(new GridLayout(2, 1));
+        JPanel textFieldPanel = new JPanel(new GridLayout(2, 1));
+        JPanel buttonPanel = new JPanel(new GridLayout(1, 2));
         textFieldPanel.setSize(280, 50);
         textFieldPanel.add(idField = new InputId());
         textFieldPanel.add(passwordField = new InputPassword());
         container.add(textFieldPanel);
 
         // 添加登录按钮
-        container.add(loginButton = new LoginButton());
+        buttonPanel.add(loginButton = new LoginButton());
 
         // 添加注册按钮
-        container.add(registerButton = new RegisterButton());
+        buttonPanel.add(registerButton = new RegisterButton());
+
+        container.add(buttonPanel);
+
+
 
         // 不可拖动窗口边缘来改变大小
         this.setResizable(false);
