@@ -45,6 +45,7 @@ public class AddProThread extends AbstractUserRequestThread{
             try {
                 if(DbUtil.addProduct(
                         detailedPro.getName(),
+                        // 根据客户端的用户来确定publisherId
                         publisherId,
                         detailedPro.getDescription(),
                         detailedPro.getPrice()

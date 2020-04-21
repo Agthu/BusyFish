@@ -35,9 +35,9 @@ public class BTextField extends JTextField implements FocusListener {
 
         // 设置文字大小
         this.setFont(new Font(
-                this.getFont().getFontName(),  // 原字体
-                Font.BOLD,  // 加粗
-                BStandard.TEXT_FIELD_SIZE)); // 字号
+                this.getFont().getFontName(),
+                Font.BOLD,
+                BStandard.TEXT_FIELD_SIZE));
     }
 
     /**

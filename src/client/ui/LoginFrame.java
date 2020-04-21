@@ -152,7 +152,7 @@ public class LoginFrame extends BFrame {
             super("注册");
 
             this.addActionListener(e -> {
-                new Register_Frame();
+                new RegisterFrame();
             });
 
         }
