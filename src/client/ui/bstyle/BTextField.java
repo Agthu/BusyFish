@@ -15,7 +15,7 @@ public class BTextField extends JTextField {
      * <code>hintText</code> 是文本框中未输入文字时的提示内容，
      * 类似于占位符。
      */
-    private String hintText = "请输入账号";
+    private String hintText;
 
     /**
      * <code>BTextField</code> 构造方法

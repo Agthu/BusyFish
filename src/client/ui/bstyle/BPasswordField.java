@@ -25,21 +25,27 @@ public class BPasswordField extends JPasswordField implements FocusListener {
 
         this.hintText = hintText;
 
-        // 设置默认文本为hintText,并明文可见,为了不让占位符变成星号
-        this.setEchoChar((char)0);
-        this.setText(this.hintText);
-
-        //提示文本为灰色
-        this.setForeground(Color.GRAY);
-
-        //添加监听器
-        this.addFocusListener(this);
 
         // 设置字体大小
         this.setFont(new Font(
                 this.getFont().getFontName(),
                 Font.BOLD,
                 BStandard.TEXT_FIELD_SIZE));
+    }
+
+    @Override
+    protected void paintComponent(Graphics pG) {
+        super.paintComponent(pG);
+        if(hintText == null || hintText.length() == 0 || getPassword().length > 0) {
+            return;
+        }
+        final Graphics2D g = (Graphics2D) pG;
+        g.setRenderingHint(
+                RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON
+        );
+        g.setColor(getDisabledTextColor());
+        g.drawString(hintText, getInsets().left, pG.getFontMetrics().getMaxAscent());
     }
 
     /**
