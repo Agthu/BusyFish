@@ -2,14 +2,12 @@ package client.ui.bstyle;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 
 /**
  * 设置全局默认文本框样式
  * @author Lian Guan
  */
-public class BPasswordField extends JPasswordField implements FocusListener {
+public class BPasswordField extends JPasswordField {
 
     /**
      * <code>hintText</code> 是文本框中未输入文字时的提示内容，
@@ -48,31 +46,5 @@ public class BPasswordField extends JPasswordField implements FocusListener {
         g.drawString(hintText, getInsets().left, pG.getFontMetrics().getMaxAscent());
     }
 
-    /**
-     * 获得焦点时，提示文本清空并把密码显示为星号，把
-     * @param e 获得焦点事件
-     */
-    @Override
-    public void focusGained(FocusEvent e) {
-        if(this.getText().equals(hintText)) {
-            this.setText("");
-            this.setEchoChar('*');
-            this.setForeground(Color.black);
-        }
-    }
-
-
-    /**
-     * 失去焦点时，如果未输入密码，则恢复占位符
-     * @param e 失去焦点事件
-     */
-    @Override
-    public void focusLost(FocusEvent e) {
-        if(this.getText().equals("")) {
-            this.setEchoChar((char)0);
-            this.setText(hintText);
-            this.setForeground(Color.GRAY);
-        }
-    }
 }
 
