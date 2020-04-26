@@ -68,14 +68,21 @@ public class LoginFrame extends BFrame {
         // 关闭后退出程序
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        // 添加组件
+        // 窗口容器
         container  = this.getContentPane();
         container.setLayout(new GridLayout(2, 1));
-        JPanel textFieldPanel = new JPanel(new GridLayout(2, 1));
-        JPanel buttonPanel = new JPanel(new GridLayout(1, 2));
-        textFieldPanel.setSize(280, 50);
-        textFieldPanel.add(idField = new InputId());
-        textFieldPanel.add(passwordField = new InputPassword());
+
+        // 分成输入框和按钮两块
+        JPanel textFieldPanel = new JPanel();
+        JPanel buttonPanel = new JPanel();
+
+        // 添加两种输入框
+        JPanel inputIdPanel = new JPanel(new FlowLayout());
+        JPanel inputPasswordPanel = new JPanel(new FlowLayout());
+        inputIdPanel.add(idField = new InputId());
+        inputPasswordPanel.add(passwordField = new InputPassword());
+        textFieldPanel.add(idField);
+        textFieldPanel.add(passwordField);
         container.add(textFieldPanel);
 
         // 添加登录按钮
@@ -85,9 +92,6 @@ public class LoginFrame extends BFrame {
         buttonPanel.add(registerButton = new RegisterButton());
 
         container.add(buttonPanel);
-
-
-
         // 不可拖动窗口边缘来改变大小
         this.setResizable(false);
 
@@ -171,7 +175,7 @@ public class LoginFrame extends BFrame {
  */
 class InputId extends BTextField {
     InputId() {
-        super("请输入账号");
+        super("请输入账号", 15);
     }
 }
 
@@ -181,6 +185,6 @@ class InputId extends BTextField {
  */
 class InputPassword extends BPasswordField {
     InputPassword() {
-        super("请输入密码");
+        super("请输入密码", 15);
     }
 }

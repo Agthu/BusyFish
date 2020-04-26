@@ -19,16 +19,19 @@ public class BPasswordField extends JPasswordField {
      * <code>BTextField</code> 构造方法
      * @param hintText 提示性文字，类似于html的占位符
      */
-    public BPasswordField(String hintText) {
-
+    public BPasswordField(String hintText, int columns) {
+        super(columns);
         this.hintText = hintText;
-
 
         // 设置字体大小
         this.setFont(new Font(
                 this.getFont().getFontName(),
                 Font.BOLD,
                 BStandard.TEXT_FIELD_SIZE));
+    }
+
+    public BPasswordField(String hintText) {
+        this(hintText, 10);
     }
 
     @Override

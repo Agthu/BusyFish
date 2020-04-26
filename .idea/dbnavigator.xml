@@ -23,12 +23,16 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes />
+    <loaded-nodes>
+      <connection connection-id="3ac63c7f-bf3f-4283-a51d-16aa8b92ee29">
+        <schema name="busyfish" object-types="view, table" />
+      </connection>
+    </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="3ac63c7f-bf3f-4283-a51d-16aa8b92ee29">
-      <console name="Connection" type="STANDARD" schema="busyfish" session="Main"><![CDATA[use busyfish;
-select * from products;]]></console>
+      <console name="Connection" type="STANDARD" schema="busyfish" session="Main">use busyfish;
+select * from products;</console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">

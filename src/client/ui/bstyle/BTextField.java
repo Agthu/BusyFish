@@ -18,8 +18,10 @@ public class BTextField extends JTextField {
     /**
      * <code>BTextField</code> 构造方法
      * @param hintText 提示性文字，类似于html的占位符
+     * @param columns 长度
      */
-    public BTextField(String hintText) {
+    public BTextField(String hintText, int columns) {
+        super(columns);
         this.hintText = hintText;
         this.setSize(400, 10);
 
@@ -28,6 +30,10 @@ public class BTextField extends JTextField {
                 this.getFont().getFontName(),
                 Font.BOLD,
                 BStandard.TEXT_FIELD_SIZE));
+    }
+
+    public BTextField(String hintText) {
+        this(hintText, 10);
     }
 
     @Override

@@ -33,6 +33,7 @@ import java.util.Queue;
 
 /**
  * 数据库的通用工具类
+ * @author Lian Guan
  */
 public class DbUtil {
 
