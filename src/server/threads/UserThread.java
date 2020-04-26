@@ -62,6 +62,14 @@ public class UserThread extends Thread {
                         new AddProThread(client, detailedPro, accountId).start();
                         break;
 
+                    case GET_NEW_PRO:
+                        // TODO 获取近期商品
+                        break;
+
+                    case DELETE_PRO:
+                        // TODO 删除商品
+                        break;
+
                     default:
                         break;
                 }
