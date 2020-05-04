@@ -27,7 +27,7 @@ public class ViewMainFrame extends javax.swing.JFrame {
 		jLabel1 = new javax.swing.JLabel();
 		jb_buyer = new javax.swing.JButton();
 		jb_seller = new javax.swing.JButton();
-		jButton3 = new javax.swing.JButton();
+		jButton = new javax.swing.JButton();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,9 +48,9 @@ public class ViewMainFrame extends javax.swing.JFrame {
 			}
 		});
 
-		jButton3.setText("我的消息");
+		jButton.setText("我的消息");
 		
-		jButton3.addActionListener(new java.awt.event.ActionListener() {
+		jButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {                 //  设置 我的消息 监听器
 				jb_MessagetActionPerformed(evt);
 			}
@@ -67,7 +67,7 @@ public class ViewMainFrame extends javax.swing.JFrame {
 					    .addContainerGap()).addGroup(
 				layout.createSequentialGroup().addGap(27, 27, 27).addComponent(jb_buyer).
 				addGap(57, 57, 57).addComponent(jb_seller).
-                addGap(57,57,57).addComponent(jButton3).addGap(22, 22,22))); //控制JButton水平连续组对应的间隙
+                addGap(57,57,57).addComponent(jButton).addGap(22, 22,22))); //控制JButton水平连续组对应的间隙
 		layout
 				.setVerticalGroup(layout                             //创建GroupLayout的垂直连续组
 						.createParallelGroup(
@@ -81,7 +81,7 @@ public class ViewMainFrame extends javax.swing.JFrame {
 										.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
 														.addComponent(jb_buyer)
 														.addComponent(jb_seller)
-														.addComponent(jButton3))
+														.addComponent(jButton))
 										.addContainerGap(87, Short.MAX_VALUE))); // 控制JButton和底部距离
 
 		pack();
@@ -103,7 +103,7 @@ public class ViewMainFrame extends javax.swing.JFrame {
 		new MessageFrame().setVisible(true); 
 	}
 	
-	private javax.swing.JButton jButton3;
+	private javax.swing.JButton jButton;
 	private javax.swing.JLabel jLabel1;
 	private javax.swing.JButton jb_seller;
 	private javax.swing.JButton jb_buyer;
