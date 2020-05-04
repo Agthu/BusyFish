@@ -11,14 +11,14 @@ public class BuyProductFrame extends javax.swing.JFrame {
 jPanel = new javax.swing.JPanel();
 jLabel1 = new javax.swing.JLabel();
 s_productNameTxt = new javax.swing.JTextField();
-jLabel3 = new javax.swing.JLabel();
+jLabel2 = new javax.swing.JLabel();
 jb_search = new javax.swing.JButton();
 jScrollPane1 = new javax.swing.JScrollPane();
 productTable = new javax.swing.JTable();
 jb_cost = new javax.swing.JButton();
 jPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("交易广场"));    //设置标题为 交易广场  
 jLabel1.setText("搜索商品");
-jLabel3.setText("商品类别");
+jLabel2.setText("商品类别");
 jb_search.setIcon(new javax.swing.ImageIcon("./images\\search.png")); //  设置搜索按钮的图片
 jb_search.setText("搜索");
 jb_search.addActionListener(new java.awt.event.ActionListener() {          //设置搜索按钮的监听器
@@ -114,7 +114,7 @@ pack();
 	}
 	
 	private javax.swing.JLabel jLabel1;
-	private javax.swing.JLabel jLabel3;
+	private javax.swing.JLabel jLabel2;
 	private javax.swing.JPanel jPanel;
 	private javax.swing.JScrollPane jScrollPane1;
 	private javax.swing.JButton jb_cost;
