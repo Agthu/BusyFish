@@ -1,4 +1,6 @@
 package client.ui;
+import java.awt.event.ActionEvent;
+
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
@@ -16,6 +18,7 @@ jb_search = new javax.swing.JButton();
 jScrollPane1 = new javax.swing.JScrollPane();
 productTable = new javax.swing.JTable();
 jb_cost = new javax.swing.JButton();
+jb_detail = new javax.swing.JButton();
 jPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("交易广场"));    //设置标题为 交易广场  
 jLabel1.setText("搜索商品");
 jLabel2.setText("商品类别");
@@ -55,6 +58,14 @@ jb_costActionPerformed(evt);                                             //设�
 }
 });
 
+jb_detail.setIcon(new javax.swing.ImageIcon("./images\\detail.png")); //   添加详情按钮的图片
+jb_detail.setText("详情");
+jb_detail.addActionListener(new java.awt.event.ActionListener() {
+public void actionPerformed(java.awt.event.ActionEvent evt) {
+jb_detailActionPerformed(evt);                                             //设置详情按钮监听器
+}
+});
+
 
 javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel);
 jPanel.setLayout(jPanel1Layout);
@@ -62,13 +73,16 @@ jPanel1Layout.setHorizontalGroup(                          //创建水平连续�
 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 .addGroup(jPanel1Layout.createSequentialGroup()
 .addGap(20, 20, 20)
-.addComponent(jLabel1)        //商品名称按钮
+.addComponent(jLabel1)        //搜索商品按钮
 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
 .addComponent(s_productNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)//设置商品名称搜索框的长度
 .addGap(18, 18, 18)
 .addComponent(jb_cost)
 .addGap(18, 18, 18)
 .addComponent(jb_search)          //设置搜索按钮
+.addGap(45, 45, 45)
+
+.addComponent(jb_detail)
 .addGap(50, 50, 50))
 .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 792, Short.MAX_VALUE)
 );
@@ -78,9 +92,10 @@ jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
 .addComponent(jLabel1)
 .addComponent(s_productNameTxt, 20,20,20)		 //设置商品搜索框的大小
-.addComponent(jb_search))                               
+.addComponent(jb_search)
+.addComponent(jb_detail))                               
 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)       
-.addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+.addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                             					//设置表格高度
 .addComponent(jb_cost)                        	// 
 .addContainerGap(30, Short.MAX_VALUE)));        // 设置购买按钮下间隙
@@ -102,11 +117,11 @@ pack();
 	 */
 	
 	
-/*	private void jb_searchActionPerformed(java.awt.event.ActionEvent evt) {
+	private void jb_searchActionPerformed(java.awt.event.ActionEvent evt) {
 		String productName = this.s_productNameTxt.getText();
 		Product product = new Product(productName);
 		this.fillTable(product);                            // 设置点击 搜索 后的触发事件 (根据商品名字查找商品)
-	}*/public static void main(String args[]) {
+	}public static void main(String args[]) {
 		java.awt.EventQueue.invokeLater(new Runnable() {             
 			public void run() {
 				new BuyProductFrame().setVisible(true);
@@ -117,7 +132,11 @@ pack();
 	private void jb_costActionPerformed(java.awt.event.ActionEvent evt) {             //设置点击 购买 后的触发事件
 		
 	}
-	private void productTableMousePressed(java.awt.event.MouseEvent evt) {             //设置点击 商品表格 后的触发事件
+	private void productTableMousePressed(java.awt.event.MouseEvent evt) {    //设置点击 在商品列表 后的移动鼠标停放在对应商品的触发事件
+		
+	}
+   private void jb_detailActionPerformed(ActionEvent evt) {             //设置点击 详情 后的触发事件
+	   new ProductDetailFrame().setVisible(true); 
 		
 	}
 	
@@ -126,7 +145,9 @@ pack();
 	private javax.swing.JPanel jPanel;
 	private javax.swing.JScrollPane jScrollPane1;
 	private javax.swing.JButton jb_cost;
+	private javax.swing.JButton jb_detail;
 	private javax.swing.JButton jb_search;
+	
 	private javax.swing.JTable productTable;
 	private javax.swing.JTextField s_productNameTxt;
 
