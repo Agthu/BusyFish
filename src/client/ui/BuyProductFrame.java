@@ -1,8 +1,6 @@
 package client.ui;
 import java.awt.event.ActionEvent;
-
 import javax.swing.JFrame;
-import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 public class BuyProductFrame extends javax.swing.JFrame {
 	public BuyProductFrame() {
@@ -118,9 +116,7 @@ pack();
 	
 	
 	private void jb_searchActionPerformed(java.awt.event.ActionEvent evt) {
-		String productName = this.s_productNameTxt.getText();
-		Product product = new Product(productName);
-		this.fillTable(product);                            // 设置点击 搜索 后的触发事件 (根据商品名字查找商品)
+		                                                       // 设置点击 搜索 后的触发事件 (根据商品名字查找商品)
 	}public static void main(String args[]) {
 		java.awt.EventQueue.invokeLater(new Runnable() {             
 			public void run() {
@@ -129,13 +125,17 @@ pack();
 		});}
 	
 	
-	private void jb_costActionPerformed(java.awt.event.ActionEvent evt) {             //设置点击 购买 后的触发事件
+	private void jb_costActionPerformed(java.awt.event.ActionEvent evt) {             //设置点击 购买 后的触发事件（进行数据库和网络操作）
 		
 	}
-	private void productTableMousePressed(java.awt.event.MouseEvent evt) {    //设置点击 在商品列表 后的移动鼠标停放在对应商品的触发事件
+	private void productTableMousePressed(java.awt.event.MouseEvent evt) {    
 		
 	}
-   private void jb_detailActionPerformed(ActionEvent evt) {             //设置点击 详情 后的触发事件
+	/*
+	 * //设置点击 在商品列表 后的移动鼠标停放在对应商品的触发事件（用来选中表格中的商品商品）
+	 */
+   private void jb_detailActionPerformed(ActionEvent evt) {             //设置点击 详情 后的触发事件（进入商品详情界面）
+	   
 	   new ProductDetailFrame().setVisible(true); 
 		
 	}
