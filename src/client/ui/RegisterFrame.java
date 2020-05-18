@@ -108,7 +108,7 @@ public class RegisterFrame extends JFrame {
 
 
 
-	protected void do_button_actionPerformed(ActionEvent e1) {
-
-	}                                 //点击注册按钮后的事件
+		protected void do_button_actionPerformed(ActionEvent e1) throws IOException, ClassNotFoundException {	
+			UserClient.register(textField1.getText(),textField2.getText(),passwordField1.getText());
+									}                                 //点击注册按钮后的事件
 }
