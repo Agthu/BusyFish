@@ -125,16 +125,21 @@ public class RegisterFrame extends JFrame {
 			
 			if (id.equals("")) {
 				JOptionPane.showMessageDialog(null, "用户名不能为空");	
-			}
+			} else
 			if (name.equals("")) {
 				JOptionPane.showMessageDialog(null, "昵称不能为空");
-			}
+			} else
 			if (password1.equals("")) {
 				JOptionPane.showMessageDialog(null, "密码不能为空");
-			}
+			} else
 			if(!password2.equals(password1)){
 				JOptionPane.showMessageDialog(null, "两次密码要相同");	  
+			} else
+			if(UserClient.register(textField1.getText(),textField2.getText(),passwordField1.getText())) {
+				JOptionPane.showMessageDialog(null, "注册成功！");
 			}
-			UserClient.register(textField1.getText(),textField2.getText(),passwordField1.getText());
+			else {
+				JOptionPane.showMessageDialog(null, "失败");
+			}
          }//添加注册后的事件
 }
