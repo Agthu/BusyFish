@@ -3,8 +3,6 @@ import java.awt.Font;
 import javax.swing.UIManager;
 
 public class ViewMainFrame extends javax.swing.JFrame {
-
-	/** Creates new form ViewMainFrm */
 	public ViewMainFrame() {
 		 //改变系统默认字体
 		Font font = new Font("Dialog", Font.PLAIN, 18);
