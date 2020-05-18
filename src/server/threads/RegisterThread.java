@@ -33,18 +33,17 @@ public class RegisterThread extends Thread {
     @Override
     public void run() {
 
-        OutputStream os;
+
         try {
-            InputStream is = socket.getInputStream();
-            ObjectInputStream ois = new ObjectInputStream(is);
+            ObjectOutputStream oos = new ObjectOutputStream(
+                    socket.getOutputStream()
+            );
+            ObjectInputStream ois = new ObjectInputStream(
+                    socket.getInputStream()
+            );
 
             // 获取客户端传来的User对象
             User user = (User)ois.readObject();
-            // 关闭输入流
-            socket.shutdownInput();
-
-            os = socket.getOutputStream();
-            ObjectOutputStream oos = new ObjectOutputStream(os);
 
             // 如果创建成功，则向客户端发送成功提示
             if(DbUtil.createAccount(user.getId(), user.getName(), user.getPassword())) {
