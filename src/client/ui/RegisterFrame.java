@@ -1,33 +1,12 @@
-package ui;
-
-
+package client.ui;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.*;
 
-import server.DbUtil;
-import server.StringUtil;
-import data.User;
-
-
- 
 public class RegisterFrame extends JFrame {
-	DbUtil dbutil = new DbUtil();
-	//CustomerUserDao customerUserDao=new CustomerUserDao();
-	
 	private JPanel contentPane;
 	private JTextField textField1;
 	private JTextField textField2;
@@ -65,7 +44,7 @@ public class RegisterFrame extends JFrame {
 		panel2.add(textField1);
 		textField1.setColumns(18);
 		/*
-		 * 帐号界面引用 
+		 * 帐号输入界面引用 
 		 */
 		
 		JPanel panel3 = new JPanel();
@@ -73,13 +52,13 @@ public class RegisterFrame extends JFrame {
 		contentPane.add(panel3);
  
 		JLabel label3 = new JLabel("昵         称");
-		panel3.add(label3);
+	    panel3.add(label3);
  
 		textField2= new JTextField();
 		panel3.add(textField2);
 		textField2.setColumns(18);
 		/*
-		 * 昵称界面引用 
+		 * 昵称输入界面引用 
 		 */
 		
 		
@@ -94,7 +73,7 @@ public class RegisterFrame extends JFrame {
 		passwordField1.setColumns(18);
 		panel4.add(passwordField1);
 		/*
-		 * 密码界面引用 
+		 * 密码输入界面引用 
 		 */
 		
  
@@ -109,7 +88,7 @@ public class RegisterFrame extends JFrame {
 		passwordField2.setColumns(18);
 		panel5.add(passwordField2);
 		/*
-		 * 确认密码界面引用 
+		 * 确认密码输入界面引用 
 		 */
 		
  
@@ -124,78 +103,11 @@ public class RegisterFrame extends JFrame {
 		});
 		panel6.add(button);	}
 		/*
-		 * 注册界面引用 
+		 * 注册按钮界面引用 
 		 */
 	
-	public ResultSet userList(Connection con,User user)throws Exception{
-		StringBuffer sb=new StringBuffer("select * from account");
-		if(StringUtil.isNotEmtpty(user.getId())){
-			sb.append(" and id like '%"+user.getId()+"%'");
+
+	
+		protected void do_button_actionPerformed(ActionEvent e1) {					
+									}                                 //点击注册按钮后的事件
 		}
-		PreparedStatement pstmt=con.prepareStatement(sb.toString().replaceFirst("and", "where"));
-		return pstmt.executeQuery();
-	}
-/*
- * 查询数据库是否有相同用户名
- */
-	public int userAdd(Connection con,User user)throws Exception{
-		String sql="insert into account values(?,?,?)";
-		PreparedStatement pstmt=con.prepareStatement(sql);
-		pstmt.setString(1, user.getId());
-		pstmt.setString(2, user.getName());
-		pstmt.setString(3, user.getPassword());
-		return pstmt.executeUpdate();
-	}/*
-	*将注册的信息插入数据库中
-	*/
-		protected void do_button_actionPerformed(ActionEvent e1) {
-		
-		String  id=this.textField1.getText();
-		String  name=this.textField2.getText();
-		String password=new String(this.passwordField1.getPassword());
-		User user=new User(  id,  name,  password );
-		Connection con = null;
-        try {
-        	con=dbutil.getDatabaseConnection();
-        	ResultSet rs = userList(con, user);
-        	while(rs.next()){   
-				String accountId1=rs.getString("id"); //查找数据库中是否有相同用户名
-				if(id.equals(accountId1)){
-					
-
-					JOptionPane.showMessageDialog(null, "用户名已存在！");
-										return;
-									}}
-										con = DbUtil.getDatabaseConnection();			
-										
-
-										int 	addNum=userAdd(con, user);
-										if(addNum==1){
-											
-
-					JOptionPane.showMessageDialog(null, "注册成功");
-											this.dispose();
-										}else{
-											
-
-					JOptionPane.showMessageDialog(null, "注册失败");
-										}
-									
-									
-									
-								
-			
-		}catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "注册失败");
-		}finally{
-			try {
-				dbutil.closeCon(con);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				
-			}
-		}
-	}}
