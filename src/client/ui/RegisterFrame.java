@@ -119,5 +119,21 @@ public class RegisterFrame extends JFrame {
 	
 		protected void do_button_actionPerformed(ActionEvent e1) throws IOException, ClassNotFoundException {	
 			UserClient.register(textField1.getText(),textField2.getText(),passwordField1.getText());
-									}                                 //点击注册按钮后的事件
+         	String  id=textField1.getText();
+		String  name=textField2.getText();
+		String password1=new String(passwordField1.getPassword());
+		String password2=new String(passwordField2.getPassword());
+		
+		if (id.equals("")) {
+			JOptionPane.showMessageDialog(null, "用户名不能为空");	
 		}
+		if (name.equals("")) {
+			JOptionPane.showMessageDialog(null, "昵称不能为空");
+		}
+		if (password1.equals("")) {
+			JOptionPane.showMessageDialog(null, "密码不能为空");
+		}
+		if(!password2.equals(password1)){
+			JOptionPane.showMessageDialog(null, "两次密码要相同");	  
+		}}//添加注册后的事件
+}
