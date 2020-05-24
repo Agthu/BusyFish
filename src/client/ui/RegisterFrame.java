@@ -25,7 +25,7 @@ public class RegisterFrame extends JFrame {
 	public RegisterFrame() {
 		setTitle("用户注册");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 350, 250);
+		setBounds(100, 100, 450, 350);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -85,7 +85,7 @@ public class RegisterFrame extends JFrame {
 		panel5.setLayout(new FlowLayout(FlowLayout.LEFT));
 		contentPane.add(panel5);
  
-		JLabel label5 = new JLabel("确认密码");
+		JLabel label5 = new JLabel("确认密码  ");
 		panel5.add(label5);
  
 		passwordField2 = new JPasswordField();
