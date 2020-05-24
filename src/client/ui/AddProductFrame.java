@@ -8,9 +8,9 @@ import javax.swing.*;
 import client.UserClient;
 public class AddProductFrame extends javax.swing.JFrame {
     public static void main(String[] args) {
-        AddProductFrame f = new AddProductFrame(user);
+        AddProductFrame f = new AddProductFrame(null);
     }
-    private static UserClient user;
+    private  UserClient user;
     JLabel label1;
     JLabel label2;
     JLabel label3;
