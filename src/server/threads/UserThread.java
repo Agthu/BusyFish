@@ -62,6 +62,9 @@ public class UserThread extends Thread {
                         new AddProThread(client, detailedPro, accountId).start();
                         break;
 
+                    case GET_NEW_PRO:
+
+
                     default:
                         break;
                 }

@@ -1,11 +1,19 @@
 package client.ui;
+import client.UserClient;
+
 import java.awt.Font;
 import java.awt.Window;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
 public class ViewMainFrame extends javax.swing.JFrame {
-	public ViewMainFrame() {
+
+	private UserClient user;
+
+	public ViewMainFrame(UserClient user) {
+		// 当前用户
+		this.user = user;
+
 		 //改变系统默认字体
 	
 		Font font = new Font("Dialog", Font.PLAIN, 18);
