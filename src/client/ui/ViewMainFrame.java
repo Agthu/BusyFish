@@ -1,10 +1,13 @@
 package client.ui;
 import java.awt.Font;
-import javax.swing.UIManager;
+import java.awt.Window;
+import java.awt.event.ActionListener;
 
+import javax.swing.*;
 public class ViewMainFrame extends javax.swing.JFrame {
 	public ViewMainFrame() {
 		 //改变系统默认字体
+	
 		Font font = new Font("Dialog", Font.PLAIN, 18);
 		java.util.Enumeration keys = UIManager.getDefaults().keys();
 		while (keys.hasMoreElements()) {
@@ -15,39 +18,53 @@ public class ViewMainFrame extends javax.swing.JFrame {
 			}
 		}
 		initComponents();
-		//设置frame居中显示
+		JLayeredPane layeredPane;
+		//创建一个Panel和一个Label用于存放图片，作为背景。
+		JPanel jp;
+		JLabel jl;
+		ImageIcon image;
+		layeredPane=new JLayeredPane();
+		image=new ImageIcon("images\\bg2.jpg");//加入背景图片		
+		//创建背景的那些东西
+		jp=new JPanel();
+		jp.setBounds(0,0,image.getIconWidth(),image.getIconHeight());	
+		jl=new JLabel(image);
+		jp.add(jl);			
+		//将jp放到最底层。
+		layeredPane.add(jp,JLayeredPane.DEFAULT_LAYER);
+		layeredPane.add(jLabel1,JLayeredPane.MODAL_LAYER);
+		layeredPane.add(jb_buyer,JLayeredPane.MODAL_LAYER);
+		layeredPane.add(jb_seller,JLayeredPane.MODAL_LAYER);
+		layeredPane.add(jButton,JLayeredPane.MODAL_LAYER);   		
+		this.setLayeredPane(layeredPane);
+		this.setSize(550,350);
 		this.setLocationRelativeTo(null);
-	}
-
-	
-	private void initComponents() {
-
+	}	
+	private void initComponents() {		
 		jLabel1 = new javax.swing.JLabel();
 		jb_buyer = new javax.swing.JButton();
 		jb_seller = new javax.swing.JButton();
 		jButton = new javax.swing.JButton();
+		
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
 		jLabel1.setFont(new java.awt.Font("宋体", Font.BOLD, 40));
 		jLabel1.setText("BusyFish");
-
+		jLabel1.setIcon(new javax.swing.ImageIcon("./images\\fish.jpg")); //  设置搜索按钮的图片
+		
 		jb_buyer.setText("我是买家");
 		jb_buyer.addActionListener(new java.awt.event.ActionListener() {                //设置 我是买家监听器
 			public void actionPerformed(java.awt.event.ActionEvent evt) {              
 				jb_BuyProductActionPerformed(evt);
-			}
+			} 
 		});
-
 		jb_seller.setText("我是卖家"); 
 		jb_seller.addActionListener(new java.awt.event.ActionListener() {                // 设置 我是卖家监听器
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jb_AddProductActionPerformed(evt);
 			}
 		});
-
-		jButton.setText("我的消息");
-		
+		jButton.setText("我的BusyFish");		
 		jButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {                 //  设置 我的消息 监听器
 				jb_MessagetActionPerformed(evt);
@@ -97,13 +114,37 @@ public class ViewMainFrame extends javax.swing.JFrame {
 	private void jb_AddProductActionPerformed(java.awt.event.ActionEvent evt) {             //设置点击 我是卖家 后的触发事件
 		new AddProductFrame().setVisible(true); 
 	}
-	private void jb_MessagetActionPerformed(java.awt.event.ActionEvent evt) {             //设置点击 我的消息 后的触发事件
-		new MessageFrame().setVisible(true); 
+	private void jb_MessagetActionPerformed(java.awt.event.ActionEvent evt) {             //设置点击 我的 后的触发事件
+		final JPopupMenu popupmenu = new JPopupMenu("");
+        JMenuItem Message = new JMenuItem("消息");
+        JMenuItem Login = new JMenuItem("登录");
+        JMenuItem Register = new JMenuItem("注册");
+        popupmenu.add(Message);
+        popupmenu.add(Login);
+        popupmenu.add(Register);
+		popupmenu.show(jLabel1,jButton.getX()-150, jButton.getY());
+		//new MessageFrame().setVisible(true); 
+		Message.addActionListener(new ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {   
+            	new MessageFrame().setVisible(true);                          //点击消息后的触发事件   
+            }
+        });
+		Login.addActionListener(new ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {         
+            	new LoginFrame().setVisible(true);                           //点击登录后的触发事件
+            }
+        });
+		Register.addActionListener(new ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {       //点击注册后的触发事件
+            	
+            	new RegisterFrame().setVisible(true);
+            }
+        });
+
 	}
 	
 	private javax.swing.JButton jButton;
 	private javax.swing.JLabel jLabel1;
 	private javax.swing.JButton jb_seller;
 	private javax.swing.JButton jb_buyer;
-
 }
