@@ -11,18 +11,22 @@ import javax.swing.*;
 import client.UserClient;
 
 public class RegisterFrame extends JFrame {
-	private JPanel contentPane;
+	private static JPanel contentPane;
 	private JTextField textField1;
 	private JTextField textField2;
 	private JPasswordField passwordField1;
 	private JPasswordField passwordField2;
+	private  UserClient user;
  
 	public static void main(String[] args) {
-		RegisterFrame frame = new RegisterFrame();
+		RegisterFrame frame = new RegisterFrame(null);
+
 		frame.setVisible(true);
 	}
  
-	public RegisterFrame() {
+	public RegisterFrame(UserClient user) {
+		// 当前用户
+		this.user = user;
 		setTitle("用户注册");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 350);
