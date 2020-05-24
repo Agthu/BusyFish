@@ -1,14 +1,26 @@
 package client.ui;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
+
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 public class BuyProductFrame extends javax.swing.JFrame {
 	public BuyProductFrame() {
 		initComponents();
+
+
+
 		this.setLocationRelativeTo(null);                  //居中显示 
 	}
 	private void initComponents() {
+		
 jPanel = new javax.swing.JPanel();
+Image image=new ImageIcon("images\\bg1.jpg").getImage();                 //创建图片对象
+jPanel = new BackgroundPanel(image);                                    // 加入背景图片
 jLabel1 = new javax.swing.JLabel();
 s_productNameTxt = new javax.swing.JTextField();
 jLabel2 = new javax.swing.JLabel();
@@ -28,8 +40,7 @@ jb_searchActionPerformed(evt);
 }
 });
 productTable.setModel(new javax.swing.table.DefaultTableModel(                  //创建商品列表的表格
-	new Object [][] {	
-	},
+	new Object [][] {	},
 	new String [] {
 		 "商品名称", "发布人", "商品描述", "商品价格", 
 	}
@@ -108,8 +119,12 @@ layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 .addComponent(jPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 )                       //添加JPanel
 ;
+
 pack();
 }
+	
+
+
 	/*
 	 * 设置布局
 	 */
