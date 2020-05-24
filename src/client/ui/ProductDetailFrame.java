@@ -1,13 +1,17 @@
 package client.ui;
 
-import javax.swing.GroupLayout;
-import javax.swing.JScrollPane;
+import java.io.IOException;
+
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.*;
+
+import client.UserClient;
+import data.Product;
 public class ProductDetailFrame extends javax.swing.JFrame {
-    public static void main(String[] args) {
-        ProductDetailFrame f = new ProductDetailFrame();
+    public static void main(String[] args) throws IOException, ClassNotFoundException{
+        ProductDetailFrame f = new ProductDetailFrame(null);
     }
+    private  UserClient user;
 
     JLabel label1;
     JLabel label2;
@@ -22,7 +26,9 @@ public class ProductDetailFrame extends javax.swing.JFrame {
     JTextField product_seller;
     JTextField tf;
     JButton confirm;
-    public ProductDetailFrame() {
+    public ProductDetailFrame(UserClient user) throws IOException, ClassNotFoundException{
+		// 当前用户
+		this.user = user;
         this.setVisible(true);
         this.setSize(420, 320);
         this.setVisible(true);
@@ -38,7 +44,7 @@ public class ProductDetailFrame extends javax.swing.JFrame {
         product_price = new JTextField();
         product_id = new JTextField();
         product_seller = new JTextField();
-        
+        user.getProById(BuyProductFrame.id);
         confirm = new JButton("确定");
         product_name.setEditable(false);
         product_description.setEditable(false);
@@ -50,7 +56,6 @@ public class ProductDetailFrame extends javax.swing.JFrame {
         */
         product_description.setColumns(20);
         product_description.setRows(5);
-        
         confirm.addActionListener(new java.awt.event.ActionListener() {                // 设置  确定监听器
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				AddActionPerformed(evt);
