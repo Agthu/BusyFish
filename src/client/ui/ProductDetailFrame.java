@@ -8,7 +8,7 @@ import javax.swing.*;
 import client.UserClient;
 import data.Product;
 public class ProductDetailFrame extends javax.swing.JFrame {
-    public static void main(String[] args) throws IOException, ClassNotFoundException{
+    public static void main(String[] args){
         ProductDetailFrame f = new ProductDetailFrame(null);
     }
     private  UserClient user;
@@ -26,7 +26,8 @@ public class ProductDetailFrame extends javax.swing.JFrame {
     JTextField product_seller;
     JTextField tf;
     JButton confirm;
-    public ProductDetailFrame(UserClient user) throws IOException, ClassNotFoundException{
+    JButton comment;
+    public ProductDetailFrame(UserClient user){
 		// 当前用户
 		this.user = user;
         this.setVisible(true);
@@ -39,13 +40,15 @@ public class ProductDetailFrame extends javax.swing.JFrame {
         label4 = new JLabel("[商品描述]：");
         label5 = new JLabel("[商品价格]：");
         label6 = new JLabel("[发布人   ]：");
+        
         product_name = new JTextField();
         product_description = new JTextArea();
         product_price = new JTextField();
         product_id = new JTextField();
         product_seller = new JTextField();
-        user.getProById(BuyProductFrame.id);
+       // user.getProById(BuyProductFrame.id);
         confirm = new JButton("确定");
+        comment = new JButton("评论");
         product_name.setEditable(false);
         product_description.setEditable(false);
         product_price.setEditable(false);
@@ -61,6 +64,11 @@ public class ProductDetailFrame extends javax.swing.JFrame {
 				AddActionPerformed(evt);
 			}
 		});
+       comment.addActionListener(new java.awt.event.ActionListener() {                // 设置  评论监听器
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				commentActionPerformed(evt);
+			}
+		});
         // 为指定的 Container 创建 GroupLayout
         GroupLayout layout = new GroupLayout(this.getContentPane());
         this.getContentPane().setLayout(layout);
@@ -71,7 +79,7 @@ public class ProductDetailFrame extends javax.swing.JFrame {
                 .addComponent(label3).addComponent(label4).addComponent(label5).addComponent(label6));
         hGroup.addGap(5);
         hGroup.addGroup(layout.createParallelGroup().addComponent(label1).addComponent(product_name)
-                .addComponent(product_id).addComponent(product_description).addComponent(product_price) .addComponent(product_seller).addComponent(confirm));
+                .addComponent(product_id).addComponent(product_description).addComponent(product_price).addComponent(product_seller).addComponent(comment).addComponent(confirm));
         hGroup.addGap(5);
         layout.setHorizontalGroup(hGroup);
         //创建GroupLayout的垂直连续组，，越先加入的ParallelGroup，优先级级别越高。
@@ -94,6 +102,8 @@ public class ProductDetailFrame extends javax.swing.JFrame {
         vGroup.addGroup(layout.createParallelGroup().addComponent(label6)
                 .addComponent(product_seller));
         vGroup.addGroup(layout.createParallelGroup(Alignment.TRAILING)
+                .addComponent(comment));
+        vGroup.addGroup(layout.createParallelGroup(Alignment.TRAILING)
                 .addComponent(confirm));
         vGroup.addGap(10);
         //设置垂直组
@@ -102,4 +112,7 @@ public class ProductDetailFrame extends javax.swing.JFrame {
     private void AddActionPerformed(java.awt.event.ActionEvent evt) {             //设置点击 确定 后的触发事件(返回商品列表)
     	dispose();                                                                  //关闭该窗口   
     }   
+    private void commentActionPerformed(java.awt.event.ActionEvent evt) {             //设置点击 评论 后的触发事件(返回商品列表)
+    	new ProductCommentFrame(null).setVisible(true);                                                              
+    }  
 }
