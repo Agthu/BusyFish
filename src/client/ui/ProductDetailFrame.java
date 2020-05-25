@@ -112,7 +112,7 @@ public class ProductDetailFrame extends javax.swing.JFrame {
     private void AddActionPerformed(java.awt.event.ActionEvent evt) {             //设置点击 确定 后的触发事件(返回商品列表)
     	dispose();                                                                  //关闭该窗口   
     }   
-    private void commentActionPerformed(java.awt.event.ActionEvent evt) {             //设置点击 评论 后的触发事件(返回商品列表)
+    private void commentActionPerformed(java.awt.event.ActionEvent evt) {             //设置点击 评论 后的触发事件
     	new ProductCommentFrame(null).setVisible(true);                                                              
     }  
 }
