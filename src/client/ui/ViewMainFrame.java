@@ -1,19 +1,11 @@
 package client.ui;
-import client.UserClient;
-
 import java.awt.Font;
 import java.awt.Window;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
 public class ViewMainFrame extends javax.swing.JFrame {
-
-	private UserClient user;
-
-	public ViewMainFrame(UserClient user) {
-		// 当前用户
-		this.user = user;
-
+	public ViewMainFrame() {
 		 //改变系统默认字体
 	
 		Font font = new Font("Dialog", Font.PLAIN, 18);
@@ -117,10 +109,10 @@ public class ViewMainFrame extends javax.swing.JFrame {
 		});
 	}
 	private void jb_BuyProductActionPerformed(java.awt.event.ActionEvent evt) {             //设置点击 我是买家 后的触发事件
-		new BuyProductFrame().setVisible(true);                                           
+		new BuyProductFrame(null).setVisible(true);                                           
 	}                                                             
 	private void jb_AddProductActionPerformed(java.awt.event.ActionEvent evt) {             //设置点击 我是卖家 后的触发事件
-		new AddProductFrame().setVisible(true); 
+		new AddProductFrame(null).setVisible(true); 
 	}
 	private void jb_MessagetActionPerformed(java.awt.event.ActionEvent evt) {             //设置点击 我的 后的触发事件
 		final JPopupMenu popupmenu = new JPopupMenu("");
@@ -134,7 +126,7 @@ public class ViewMainFrame extends javax.swing.JFrame {
 		//new MessageFrame().setVisible(true); 
 		Message.addActionListener(new ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {   
-            	new MessageFrame().setVisible(true);                          //点击消息后的触发事件   
+            	new MessageFrame(null).setVisible(true);                          //点击消息后的触发事件   
             }
         });
 		Login.addActionListener(new ActionListener() {
@@ -145,7 +137,7 @@ public class ViewMainFrame extends javax.swing.JFrame {
 		Register.addActionListener(new ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {       //点击注册后的触发事件
             	
-            	new RegisterFrame().setVisible(true);
+            	new RegisterFrame(null).setVisible(true);
             }
         });
 

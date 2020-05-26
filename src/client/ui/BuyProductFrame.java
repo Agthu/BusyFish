@@ -8,8 +8,15 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+
+import client.UserClient;
 public class BuyProductFrame extends javax.swing.JFrame {
-	public BuyProductFrame() {
+	public static int id;
+	private UserClient user;
+	public BuyProductFrame(UserClient user) {
+		// 当前用户
+		this.user = user;
 		initComponents();
 
 
@@ -42,16 +49,26 @@ jb_searchActionPerformed(evt);
 productTable.setModel(new javax.swing.table.DefaultTableModel(                  //创建商品列表的表格
 	new Object [][] {	},
 	new String [] {
-		 "商品名称", "发布人", "商品描述", "商品价格", 
+		 "商品名称", "发布人", "商品描述", "商品价格", "商品id"
 	}
 ) {
 	boolean[] canEdit = new boolean [] {
-		 false, false, false, false,
+		 false, false, false, false,false
 	};
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
 		return canEdit [columnIndex];
 	}
 });
+TableColumn idColumn= productTable.getColumnModel().getColumn(4);
+idColumn.setWidth(0);
+idColumn.setMaxWidth(0);
+idColumn.setMinWidth(0);
+productTable.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(0); 
+productTable.getTableHeader().getColumnModel().getColumn(4).setMinWidth(0);  
+/*
+ *  把商品列表中的id栏隐藏
+ */
+
 productTable.addMouseListener(new java.awt.event.MouseAdapter() {              //设置点击表格的监听器
 public void mousePressed(java.awt.event.MouseEvent evt) {              
 productTableMousePressed(evt);
@@ -135,7 +152,7 @@ pack();
 	}public static void main(String args[]) {
 		java.awt.EventQueue.invokeLater(new Runnable() {             
 			public void run() {
-				new BuyProductFrame().setVisible(true);
+				new BuyProductFrame(null).setVisible(true);
 			}
 		});}
 	
@@ -144,14 +161,21 @@ pack();
 		
 	}
 	private void productTableMousePressed(java.awt.event.MouseEvent evt) {    
+		int row = this.productTable.getSelectedRow();            //获取鼠标放在表格中对应的行
+		String productname =(String) productTable.getValueAt(row,0 );//   获取第1列的内容
+		String productseller =(String) productTable.getValueAt(row,1 );//   获取第2列的内容
+		String productdescription =(String) productTable.getValueAt(row,2 );//   获取第3列的内容
+		int productprice = (Integer) productTable.getValueAt(row,3 );//   获取第4列的内容
+		 id = (Integer) productTable.getValueAt(row,4 );           //   获取第5列（被隐藏）的内容
+		
 		
 	}
 	/*
-	 * //设置点击 在商品列表 后的移动鼠标停放在对应商品的触发事件（用来选中表格中的商品商品）
+	 * //设置点击 在商品列表 后的移动鼠标停放在对应商品的触发事件（用来选中表格中的商品）
 	 */
    private void jb_detailActionPerformed(ActionEvent evt) {             //设置点击 详情 后的触发事件（进入商品详情界面）
 	   
-	   new ProductDetailFrame().setVisible(true); 
+	   new ProductDetailFrame(null).setVisible(true); 
 		
 	}
 	

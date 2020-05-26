@@ -1,13 +1,16 @@
 package client.ui;
 
-import javax.swing.GroupLayout;
+import java.awt.Image;
+
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.*;
+
+import client.UserClient;
 public class AddProductFrame extends javax.swing.JFrame {
     public static void main(String[] args) {
-        AddProductFrame f = new AddProductFrame();
+        AddProductFrame f = new AddProductFrame(null);
     }
-
+    private  UserClient user;
     JLabel label1;
     JLabel label2;
     JLabel label3;
@@ -15,15 +18,16 @@ public class AddProductFrame extends javax.swing.JFrame {
     JTextField product_name;
     JTextField product_description;
     JTextField product_price;
-    JTextField tf;
+    JTextField tf;   
     JButton Add;
+    
 
-    public AddProductFrame() {
-        this.setVisible(true);
+    public AddProductFrame(UserClient user) {
+		// 当前用户
+		this.user = user;
         this.setSize(280, 220);
         this.setVisible(true);
-        this.setLocation(400, 200);
-
+        this.setLocation(400, 200);    
         label1 = new JLabel(" 发布商品");                                 // 添加按钮
         label2 = new JLabel("商品名称：");
         label3 = new JLabel("商品描述：");
@@ -37,6 +41,8 @@ public class AddProductFrame extends javax.swing.JFrame {
 				AddActionPerformed(evt);
 			}
 		});
+
+
         // 为指定的 Container 创建 GroupLayout
         GroupLayout layout = new GroupLayout(this.getContentPane());
         this.getContentPane().setLayout(layout);
@@ -68,6 +74,8 @@ public class AddProductFrame extends javax.swing.JFrame {
         vGroup.addGap(10);
         //设置垂直组
         layout.setVerticalGroup(vGroup);
+    	
+		//this.setLocationRelativeTo(null);
        
     }
     private void AddActionPerformed(java.awt.event.ActionEvent evt) {             //设置点击 发布 后的触发事件
