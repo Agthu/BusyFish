@@ -1,5 +1,6 @@
 package client.ui;
 
+import client.UserClient;
 import data.Hint;
 import data.User;
 import client.ui.bstyle.BButton;
@@ -123,13 +124,13 @@ public class LoginFrame extends BFrame {
                     // 建立客户端socket
                     Socket socket = new Socket(HOST, LOGIN_PORT);
 
-                    // 获取成功提示的对象输入流
-                    ObjectInputStream ois = new ObjectInputStream(
-                            socket.getInputStream());
-
                     // 用于发送用户名的密码的对象输出流
                     ObjectOutputStream oos = new ObjectOutputStream(
                             socket.getOutputStream());
+
+                    // 获取成功提示的对象输入流
+                    ObjectInputStream ois = new ObjectInputStream(
+                            socket.getInputStream());
 
                     // 发送登录请求和用户名密码信息
                     oos.writeObject(new User(idField.getText(), passwordField.getText()));
@@ -138,7 +139,8 @@ public class LoginFrame extends BFrame {
                     Hint hint = (Hint)ois.readObject();
                     if(hint.isSuccess()) {
                         System.out.println("成功");
-                        // TODO 进入主界面
+                        // 进入主界面
+                        new ViewMainFrame(new UserClient(socket));
                     }
                 } catch (IOException | ClassNotFoundException ioException) {
                     ioException.printStackTrace();

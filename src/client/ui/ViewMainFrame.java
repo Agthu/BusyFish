@@ -112,7 +112,7 @@ public class ViewMainFrame extends javax.swing.JFrame {
 	public static void main(String args[]) {
 		java.awt.EventQueue.invokeLater(new Runnable() {                      //
 			public void run() {
-				new ViewMainFrame().setVisible(true);
+				new ViewMainFrame(null).setVisible(true);
 			}
 		});
 	}
