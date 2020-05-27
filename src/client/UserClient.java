@@ -1,9 +1,6 @@
 package client;
 
-import data.Hint;
-import data.Product;
-import data.Request;
-import data.User;
+import data.*;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -74,5 +71,26 @@ public class UserClient {
             }
         }
         return proList;
+    }
+
+    /**
+     * 根据商品id获取评论
+     * @param productId 商品id
+     * @return 评论的链表
+     */
+    public LinkedList<Comment> getCommentOf(int productId) throws IOException, ClassNotFoundException {
+        oos.writeObject(new Request(Request.RequestType.GET_COMMENT_BY_ID));
+        LinkedList<Comment> commentList = new LinkedList<>();
+
+        while(true) {
+            Comment comment = (Comment)ois.readObject();
+            if(comment.getCommentId() != -1) {
+                commentList.add(comment);
+            }
+            else {
+                break;
+            }
+        }
+        return commentList;
     }
 }

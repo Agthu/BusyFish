@@ -3,12 +3,14 @@ package server.threads;
 import data.Product;
 import data.Request;
 import server.threads.userrequestthread.AddProThread;
+import server.threads.userrequestthread.GetCommentByIdThread;
 import server.threads.userrequestthread.SendProByIdThread;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.LinkedList;
 
 /**
  * 正式服务线程，处理一系列用户请求
@@ -63,7 +65,11 @@ public class UserThread extends Thread {
                         break;
 
                     case GET_NEW_PRO:
+                        break;
 
+                    case GET_COMMENT_BY_ID:
+                        new GetCommentByIdThread(client).start();
+                        break;
 
                     default:
                         break;

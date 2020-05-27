@@ -18,7 +18,9 @@ public class Request implements Serializable {
         // 发布商品
         ADD_PRO,
         // 获取最新商品
-        GET_NEW_PRO
+        GET_NEW_PRO,
+        // 根据商品id获取评论
+        GET_COMMENT_BY_ID
     }
 
     private final RequestType requestType;

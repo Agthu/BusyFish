@@ -21,10 +21,13 @@
         record_id / INT / 记录编号
         buyer_id / VARCHAR(30) / 买家id
         product_id / INT / 商品编号
+
+    表名：message
  */
 
 package server;
 
+import data.Comment;
 import data.Product;
 
 import java.sql.*;
@@ -294,7 +297,7 @@ public class DbUtil {
     }
 
     /**
-     * TODO 获取最新商品
+     * 获取最新商品
      * @param num 最大商品总数
      * @return 最新商品的链表
      */
@@ -336,5 +339,34 @@ public class DbUtil {
             ps.close();
         }
         return proList;
+    }
+
+    /**
+     * 根据商品id获取评论
+     * @param productId 商品id
+     * @return 评论的链表
+     */
+    public static LinkedList<Comment> getCommentOf(int productId) throws SQLException {
+        Connection database = getDatabaseConnection();
+
+        LinkedList<Comment> commentList = new LinkedList<>();
+
+        String queryCommand = "SELECT * FROM comments WHERE product_id=?";
+        PreparedStatement ps = database.prepareStatement(queryCommand);
+        ps.setInt(1, productId);
+
+        ResultSet result;
+
+        result = ps.executeQuery();
+
+        while(result.next()) {
+            commentList.add(new Comment(
+                    result.getInt("comment_id"),
+                    result.getString("publisher_id"),
+                    result.getString("content")
+            ));
+        }
+
+        return commentList;
     }
 }
