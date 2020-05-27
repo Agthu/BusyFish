@@ -14,6 +14,10 @@ import client.UserClient;
 public class BuyProductFrame extends javax.swing.JFrame {
 	public static int id;
 	private UserClient user;
+	public static  String productname;
+	public static String productseller;
+	public static String productdescription="dqwaaa";
+	public static String productprice;
 	public BuyProductFrame(UserClient user) {
 		// 当前用户
 		this.user = user;
@@ -162,10 +166,10 @@ pack();
 	}
 	private void productTableMousePressed(java.awt.event.MouseEvent evt) {    
 		int row = this.productTable.getSelectedRow();            //获取鼠标放在表格中对应的行
-		String productname =(String) productTable.getValueAt(row,0 );//   获取第1列的内容
-		String productseller =(String) productTable.getValueAt(row,1 );//   获取第2列的内容
-		String productdescription =(String) productTable.getValueAt(row,2 );//   获取第3列的内容
-		int productprice = (Integer) productTable.getValueAt(row,3 );//   获取第4列的内容
+		 productname =(String) productTable.getValueAt(row,0 );//   获取第1列的内容
+		 productseller = (String) productTable.getValueAt(row,1 );//   获取第2列的内容
+		 productdescription =(String) productTable.getValueAt(row,2 );//   获取第3列的内容
+		 productprice = (String) productTable.getValueAt(row,3 );//   获取第4列的内容
 		 id = (Integer) productTable.getValueAt(row,4 );           //   获取第5列（被隐藏）的内容
 		
 		
@@ -175,7 +179,7 @@ pack();
 	 */
    private void jb_detailActionPerformed(ActionEvent evt) {             //设置点击 详情 后的触发事件（进入商品详情界面）
 	   
-	   new ProductDetailFrame(null).setVisible(true); 
+	   new ProductDetailFrame(null,null).setVisible(true); 
 		
 	}
 	
@@ -186,7 +190,6 @@ pack();
 	private javax.swing.JButton jb_cost;
 	private javax.swing.JButton jb_detail;
 	private javax.swing.JButton jb_search;
-	
 	private javax.swing.JTable productTable;
 	private javax.swing.JTextField s_productNameTxt;
 
