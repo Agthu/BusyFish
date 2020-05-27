@@ -1,7 +1,6 @@
 package client.ui;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -10,11 +9,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-
 import client.UserClient;
+import data.Comment;
 public class ProductCommentFrame extends javax.swing.JFrame {
-	public static int id;
+	public String productId;
 	private UserClient user;
+	public String publisher_name;
 	public ProductCommentFrame(UserClient user) {
 		// 当前用户
 		this.user = user;
@@ -105,10 +105,13 @@ pack();
 		});}
 	
 	
-	private void jb_commentActionPerformed(java.awt.event.ActionEvent evt) {             //设置点击 立即评论 后的触发事件（进行数据库和网络操作）
+	public Comment jb_commentActionPerformed(java.awt.event.ActionEvent evt) {             //设置点击 立即评论 后的触发事件（进行数据库和网络操作）
 		 String str= JOptionPane.showInputDialog(null, "请输入您的评论","评论", JOptionPane.PLAIN_MESSAGE);
-	}
+		 Comment comment = new Comment(productId, publisher_name,str);
+		 return comment;
 
+	}
+		
 	
 	private javax.swing.JPanel jPanel;
 	private javax.swing.JScrollPane jScrollPane1;
