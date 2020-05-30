@@ -1,6 +1,7 @@
 package server.threads.userrequestthread;
 
 import data.Product;
+import server.Client;
 import server.DbUtil;
 
 import java.io.IOException;
@@ -17,7 +18,7 @@ public class SendProByIdThread extends AbstractUserRequestThread {
 
     private int id;
 
-    public SendProByIdThread(Socket client, int id) {
+    public SendProByIdThread(Client client, int id) {
         super(client);
         this.id = id;
     }
@@ -31,8 +32,8 @@ public class SendProByIdThread extends AbstractUserRequestThread {
         ObjectInputStream ois;
         try {
             // 对象输入、输出流
-            oos = new ObjectOutputStream(this.getClient().getOutputStream());
-            ois = new ObjectInputStream(this.getClient().getInputStream());
+            oos = getClient().getOos();
+            ois = getClient().getOis();
 
             Product product = (Product)ois.readObject();
             // 根据id从数据库中获取商品信息，并输出

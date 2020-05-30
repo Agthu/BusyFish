@@ -1,6 +1,7 @@
 package server.threads.userrequestthread;
 
 import data.Product;
+import server.Client;
 import server.DbUtil;
 
 import java.io.IOException;
@@ -14,14 +15,14 @@ import java.util.LinkedList;
  * @author Lian Guan
  */
 public class GetNewProThread extends AbstractUserRequestThread {
-    public GetNewProThread(Socket client) {
+    public GetNewProThread(Client client) {
         super(client);
     }
 
     @Override
     public void run() {
         try {
-            ObjectOutputStream oos = new ObjectOutputStream(getClient().getOutputStream());
+            ObjectOutputStream oos = getClient().getOos();
             LinkedList<Product> proList = DbUtil.getNewProducts(10);
             for(Product product: proList) {
                 oos.writeObject(product);

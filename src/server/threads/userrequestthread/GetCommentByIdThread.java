@@ -2,6 +2,7 @@ package server.threads.userrequestthread;
 
 import data.Comment;
 import data.Product;
+import server.Client;
 import server.DbUtil;
 
 import java.io.IOException;
@@ -17,7 +18,7 @@ public class GetCommentByIdThread extends AbstractUserRequestThread{
      *
      * @param client 客户端socket
      */
-    public GetCommentByIdThread(Socket client) {
+    public GetCommentByIdThread(Client client) {
         super(client);
     }
 
@@ -27,8 +28,8 @@ public class GetCommentByIdThread extends AbstractUserRequestThread{
         ObjectInputStream ois;
 
         try {
-            oos = new ObjectOutputStream(getClient().getOutputStream());
-            ois = new ObjectInputStream(getClient().getInputStream());
+            oos = getClient().getOos();
+            ois = getClient().getOis();
 
             Product product = (Product)ois.readObject();
             LinkedList<Comment> commentList = DbUtil.getCommentOf(product.getId());

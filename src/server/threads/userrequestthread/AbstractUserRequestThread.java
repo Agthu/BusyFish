@@ -1,5 +1,7 @@
 package server.threads.userrequestthread;
 
+import server.Client;
+
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -13,17 +15,17 @@ public abstract class AbstractUserRequestThread extends Thread{
     /**
      * 发送请求的客户端
      */
-    private Socket client;
+    private Client client;
 
     /**
      * 构造方法
      * @param client 客户端socket
      */
-    public AbstractUserRequestThread(Socket client) {
+    public AbstractUserRequestThread(Client client) {
         this.client = client;
     }
 
-    public Socket getClient() {
+    public Client getClient() {
         return client;
     }
 

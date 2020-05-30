@@ -20,7 +20,11 @@ public class Request implements Serializable {
         // 获取最新商品
         GET_NEW_PRO,
         // 根据商品id获取评论
-        GET_COMMENT_BY_ID
+        GET_COMMENT_BY_ID,
+        //发布评论
+        ADD_COMMENT,
+        //发送消息
+        SEND_MESSAGE
     }
 
     private final RequestType requestType;

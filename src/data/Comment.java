@@ -8,10 +8,16 @@ public class Comment implements Serializable{
     private String publisher_id;
     private String publisher_name;
     private String content;
+    private int productId;
 
     public Comment(int commentId, String publisher_id, String content) {
         this.commentId = commentId;
         this.publisher_id = publisher_id;
+        this.content = content;
+    }
+
+    public Comment(int productId, String content) {
+        this.productId = productId;
         this.content = content;
     }
 
@@ -29,5 +35,9 @@ public class Comment implements Serializable{
 
     public int getCommentId() {
         return commentId;
+    }
+
+    public int getProductId() {
+        return productId;
     }
 }

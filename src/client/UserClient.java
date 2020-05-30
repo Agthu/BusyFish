@@ -93,4 +93,13 @@ public class UserClient {
         }
         return commentList;
     }
+
+    /**
+     * 发布评论
+     * @param id 要评论的商品id
+     * @param content 评论内容
+     */
+    public void addComment(int id, String content) {
+
+    }
 }

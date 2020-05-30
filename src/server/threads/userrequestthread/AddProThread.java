@@ -2,6 +2,7 @@ package server.threads.userrequestthread;
 
 import data.Hint;
 import data.Product;
+import server.Client;
 import server.DbUtil;
 
 import java.io.IOException;
@@ -31,7 +32,7 @@ public class AddProThread extends AbstractUserRequestThread{
      * @param detailedPro 商品的详细信息
      * @param publisherId 发布者的id
      */
-    public AddProThread(Socket client, Product detailedPro, String publisherId) {
+    public AddProThread(Client client, Product detailedPro, String publisherId) {
         super(client);
         this.detailedPro = detailedPro;
         this.publisherId = publisherId;
@@ -41,7 +42,7 @@ public class AddProThread extends AbstractUserRequestThread{
     public void run() {
         ObjectOutputStream oos;
         try {
-            oos = new ObjectOutputStream(getClient().getOutputStream());
+            oos = getClient().getOos();
             try {
                 if(DbUtil.addProduct(
                         detailedPro.getName(),

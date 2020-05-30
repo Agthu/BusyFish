@@ -2,9 +2,8 @@ package server.threads;
 
 import data.Product;
 import data.Request;
-import server.threads.userrequestthread.AddProThread;
-import server.threads.userrequestthread.GetCommentByIdThread;
-import server.threads.userrequestthread.SendProByIdThread;
+import server.Client;
+import server.threads.userrequestthread.*;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -17,33 +16,23 @@ import java.util.LinkedList;
  * @author Lian Guan
  */
 public class UserThread extends Thread {
-    private final Socket client;
+    private final Client client;
 
-    /**
-     * 当前服务的客户端的用户ID
-     */
-    private String accountId;
 
     /**
      * 构造方法
      * @param client 客户端的socket
-     * @param accountId 当前客户端用户的id
      */
-    public UserThread(Socket client, String accountId) {
+    public UserThread(Client client) {
         this.client = client;
-        this.accountId = accountId;
     }
 
     @Override
     public void run() {
         ObjectOutputStream oos = null;
         ObjectInputStream ois = null;
-        try {
-            oos = new ObjectOutputStream(client.getOutputStream());
-            ois = new ObjectInputStream(client.getInputStream());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        oos = client.getOos();
+        ois = client.getOis();
 
 
         while(true) {
@@ -61,15 +50,19 @@ public class UserThread extends Thread {
 
                     case ADD_PRO:
                         Product detailedPro = (Product)ois.readObject();
-                        new AddProThread(client, detailedPro, accountId).start();
+                        new AddProThread(client, detailedPro, client.getUserId()).start();
                         break;
 
                     case GET_NEW_PRO:
+                        new GetNewProThread(client).start();
                         break;
 
                     case GET_COMMENT_BY_ID:
                         new GetCommentByIdThread(client).start();
                         break;
+
+                    case ADD_COMMENT:
+                        new AddCommentThread(client).start();
 
                     default:
                         break;

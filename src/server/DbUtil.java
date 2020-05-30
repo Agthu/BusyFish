@@ -366,7 +366,31 @@ public class DbUtil {
                     result.getString("content")
             ));
         }
-
+        database.close();
         return commentList;
+    }
+
+    /**
+     * TODO 发布评论
+     * @param productId 商品id
+     * @param publisherId 发布者id
+     * @param content 评论内容
+     * @return 成功或失败
+     */
+    public static boolean AddComment(int productId, String publisherId, String content) throws SQLException {
+        Connection database = getDatabaseConnection();
+        String updateCommand = "INSERT INTO comments(comment_id,product_id,publisher_id,content)=(null,?,?,?)";
+        PreparedStatement ps = database.prepareStatement(updateCommand);
+        ps.setInt(1, productId);
+        ps.setString(2, publisherId);
+        ps.setString(3, content);
+        try {
+            ps.executeUpdate();
+            return true;
+        } catch(SQLException e) {
+            return false;
+        } finally {
+            database.close();
+        }
     }
 }
