@@ -38,18 +38,13 @@ public class MessageFrame extends javax.swing.JFrame {
 		 //chat_frame.pack();
 	send.addActionListener(new java.awt.event.ActionListener() {                //设置 发送消息监听器
 			public void actionPerformed(java.awt.event.ActionEvent evt) {              
-				try {
-					sendActionPerformed(evt);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				sendActionPerformed(evt);
 			}
 		});
 	}   
-    private void sendActionPerformed(java.awt.event.ActionEvent evt) throws IOException {             //设置点击 发送消息 后的触发事件
-    	user.sendMessage(id_input.getText(),input_area.getText()); 
-    	show_area.setText(input_area.getText());                                     //发送后显示框显示输入框内容
+    private void sendActionPerformed(java.awt.event.ActionEvent evt) /*throws IOException*/ {             //设置点击 发送消息 后的触发事件
+    	//user.sendMessage(id_input.getText(),input_area.getText()); 
+    	show_area.append("\n"+input_area.getText());                                    //发送后显示框显示输入框内容
     	input_area.setText("");                                                      //发送后输入框清空
 	
 	} 
