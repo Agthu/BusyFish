@@ -7,12 +7,13 @@ import javax.swing.*;
 
 import client.UserClient;
 import data.Product;
+import data.User;
 public class ProductDetailFrame extends javax.swing.JFrame {
-    public static void main(String[] args){
-        ProductDetailFrame f = new ProductDetailFrame(null, null);
+    public static void main(String[] args) throws IOException, ClassNotFoundException{
+        ProductDetailFrame f = new ProductDetailFrame(null,  null);
     }
     private  UserClient user;
-    private String productId;
+    public  int id;
     JLabel label1;
     JLabel label2;
     JLabel label3;
@@ -28,10 +29,10 @@ public class ProductDetailFrame extends javax.swing.JFrame {
     JButton confirm;
     JButton comment;
 
-    public ProductDetailFrame(UserClient user,String productId ){
+    public ProductDetailFrame(UserClient user, int id) throws IOException, ClassNotFoundException{
 		// 当前用户
 		this.user = user;
-		this.productId=productId;
+		this.id=id;
         this.setVisible(true);
         this.setSize(420, 320);
         this.setVisible(true);
@@ -47,8 +48,7 @@ public class ProductDetailFrame extends javax.swing.JFrame {
         product_description = new JTextArea();
         product_price = new JTextField();
         product_id = new JTextField();
-        product_seller = new JTextField();
-        //user.getProById(BuyProductFrame.id);
+        product_seller = new JTextField();  
         confirm = new JButton("确定");
         comment = new JButton("评论");
         product_name.setEditable(false);
@@ -59,7 +59,17 @@ public class ProductDetailFrame extends javax.swing.JFrame {
        /*
         * 设置不可编辑 
         */
-        getdeatil();                                                                 //调用获得商品信息的方法     
+        Product product = user.getProById(id);                                     // 根据id获取商品详情  
+        product_name.setText(product.getName());                                   
+        product_description.setText(product.getDescription());
+        product_price.setText(String.valueOf(product.getPrice()));           
+        product_id.setText(String.valueOf(product.getId()));
+        product_seller.setText(product.getPublisherId());
+        /*
+         * 在客户端显示内容
+         */
+        
+        
         product_description.setColumns(20);
         product_description.setRows(5);
         confirm.addActionListener(new java.awt.event.ActionListener() {                // 设置  确定监听器
@@ -69,7 +79,15 @@ public class ProductDetailFrame extends javax.swing.JFrame {
 		});
        comment.addActionListener(new java.awt.event.ActionListener() {                // 设置  评论监听器
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				commentActionPerformed(evt);
+				try {
+					commentActionPerformed(evt);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
         // 为指定的 Container 创建 GroupLayout
@@ -112,20 +130,17 @@ public class ProductDetailFrame extends javax.swing.JFrame {
         //设置垂直组
         layout.setVerticalGroup(vGroup);
     }
-    private void AddActionPerformed(java.awt.event.ActionEvent evt) {             //设置点击 确定 后的触发事件(返回商品列表)
+    public ProductDetailFrame(Object user2, Object object) {
+		// TODO Auto-generated constructor stub
+	}
+	private void AddActionPerformed(java.awt.event.ActionEvent evt) {             //设置点击 确定 后的触发事件(返回商品列表)
     	dispose();                                                                  //关闭该窗口   
     }   
-    private void commentActionPerformed(java.awt.event.ActionEvent evt) {             //设置点击 评论 后的触发事件
-    	new ProductCommentFrame(null).setVisible(true);                                                              
+    private void commentActionPerformed(java.awt.event.ActionEvent evt) throws IOException, ClassNotFoundException {             //设置点击 评论 后的触发事件
+    	new ProductCommentFrame(null,id).setVisible(true);
+    	
     }  
-    public void getdeatil() {                                                         //从商品表格获取商品信息详情
-    	product_name.setText(BuyProductFrame.productname);
-    	product_seller.setText(BuyProductFrame.productseller);
-    	product_description.setText(BuyProductFrame.productdescription);
-    	product_price.setText(BuyProductFrame.productprice);
-    	product_id.setText(productId);                     	
-    }       
-     
+  
     
     
 }
