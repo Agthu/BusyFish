@@ -2,12 +2,18 @@ package client.ui;
 import java.awt.Font;
 import java.awt.Window;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.*;
+
+import client.UserClient;
+
+import data.User;
 public class ViewMainFrame extends javax.swing.JFrame {
-	public ViewMainFrame() {
+	private static  UserClient user;
+	public ViewMainFrame(UserClient user) {
+		this.user=user;
 		 //改变系统默认字体
-	
 		Font font = new Font("Dialog", Font.PLAIN, 18);
 		java.util.Enumeration keys = UIManager.getDefaults().keys();
 		while (keys.hasMoreElements()) {
@@ -55,7 +61,15 @@ public class ViewMainFrame extends javax.swing.JFrame {
 		jb_buyer.setText("我是买家");
 		jb_buyer.addActionListener(new java.awt.event.ActionListener() {                //设置 我是买家监听器
 			public void actionPerformed(java.awt.event.ActionEvent evt) {              
-				jb_BuyProductActionPerformed(evt);
+				try {
+					jb_BuyProductActionPerformed(evt);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			} 
 		});
 		jb_seller.setText("我是卖家"); 
@@ -64,7 +78,7 @@ public class ViewMainFrame extends javax.swing.JFrame {
 				jb_AddProductActionPerformed(evt);
 			}
 		});
-		jButton.setText("我的BusyFish");		
+		jButton.setText("我的消息");		
 		jButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {                 //  设置 我的消息 监听器
 				jb_MessagetActionPerformed(evt);
@@ -104,43 +118,19 @@ public class ViewMainFrame extends javax.swing.JFrame {
 	public static void main(String args[]) {
 		java.awt.EventQueue.invokeLater(new Runnable() {                      //
 			public void run() {
-				new ViewMainFrame(null).setVisible(true);
+				new ViewMainFrame(user).setVisible(true);
 			}
 		});
 	}
-	private void jb_BuyProductActionPerformed(java.awt.event.ActionEvent evt) {             //设置点击 我是买家 后的触发事件
-		new BuyProductFrame(null).setVisible(true);                                           
+	private void jb_BuyProductActionPerformed(java.awt.event.ActionEvent evt) throws IOException, ClassNotFoundException {             //设置点击 我是买家 后的触发事件
+		new BuyProductFrame(user).setVisible(true);                                           
 	}                                                             
 	private void jb_AddProductActionPerformed(java.awt.event.ActionEvent evt) {             //设置点击 我是卖家 后的触发事件
-		new AddProductFrame(null).setVisible(true); 
+		new AddProductFrame(user).setVisible(true); 
 	}
-	private void jb_MessagetActionPerformed(java.awt.event.ActionEvent evt) {             //设置点击 我的 后的触发事件
-		final JPopupMenu popupmenu = new JPopupMenu("");
-        JMenuItem Message = new JMenuItem("消息");
-        JMenuItem Login = new JMenuItem("登录");
-        JMenuItem Register = new JMenuItem("注册");
-        popupmenu.add(Message);
-        popupmenu.add(Login);
-        popupmenu.add(Register);
-		popupmenu.show(jLabel1,jButton.getX()-150, jButton.getY());
-		//new MessageFrame().setVisible(true); 
-		Message.addActionListener(new ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {   
-            	new MessageFrame(null).setVisible(true);                          //点击消息后的触发事件   
-            }
-        });
-		Login.addActionListener(new ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {         
-            	new LoginFrame().setVisible(true);                           //点击登录后的触发事件
-            }
-        });
-		Register.addActionListener(new ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {       //点击注册后的触发事件
-            	
-            	new RegisterFrame(null).setVisible(true);
-            }
-        });
-
+	private void jb_MessagetActionPerformed(java.awt.event.ActionEvent evt) {             //设置点击消息 后的触发事件	
+            	new MessageFrame(user).setVisible(true);                          //点击消息后的触发事件       
+        ;
 	}
 	
 	private javax.swing.JButton jButton;
