@@ -1,6 +1,10 @@
 package client.ui;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.util.LinkedList;
+import java.util.Vector;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -9,15 +13,20 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+
+
 import client.UserClient;
 import data.Comment;
+import data.Product;
 public class ProductCommentFrame extends javax.swing.JFrame {
-	public String productId;
+	public static  int id;
 	private UserClient user;
 	public String publisher_name;
-	public ProductCommentFrame(UserClient user) {
+	public ProductCommentFrame(UserClient user, Integer id) throws IOException, ClassNotFoundException {
 		// 当前用户
 		this.user = user;
+		this.id=id;
+		getcomment();
 		initComponents();
 		this.setLocationRelativeTo(null);                  //居中显示 
 	}
@@ -55,7 +64,12 @@ jScrollPane1.setViewportView(commentTable);            //使表格可以滚动
 jb_comment.setText("我要评论");
 jb_comment.addActionListener(new java.awt.event.ActionListener() {
 public void actionPerformed(java.awt.event.ActionEvent evt) {
-jb_commentActionPerformed(evt);                                             //设置我要评论按钮监听器
+try {
+	jb_commentActionPerformed(evt);
+} catch (IOException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+}                                             //设置我要评论按钮监听器
 }
 });
 
@@ -100,18 +114,31 @@ pack();
 		public static void main(String args[]) {
 		java.awt.EventQueue.invokeLater(new Runnable() {             
 			public void run() {
-				new ProductCommentFrame(null).setVisible(true);
+				try {
+					new ProductCommentFrame(null, id).setVisible(true);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});}
-	
-	
-	public Comment jb_commentActionPerformed(java.awt.event.ActionEvent evt) {             //设置点击 立即评论 后的触发事件（进行数据库和网络操作）
-		 String str= JOptionPane.showInputDialog(null, "请输入您的评论","评论", JOptionPane.PLAIN_MESSAGE);
-		 Comment comment = new Comment(productId, publisher_name,str);
-		 return comment;
-
+public void getcomment() throws IOException, ClassNotFoundException{
+		 LinkedList<Comment> productList =user.getCommentOf(id);             //获取商品信息
+		   DefaultTableModel dtm = (DefaultTableModel) commentTable.getModel();
+		   dtm.setRowCount(0);//把前面的数据释放掉
+		   for(Comment p: productList){
+		   Vector v = new Vector();
+			v.add(p.getPublisher_id());                      //将获得的商品名称填入表格
+			v.add(p.getContent());                     //将获得的商品发布人填入表格          
+			dtm.addRow(v);}
+}
+	public void jb_commentActionPerformed(java.awt.event.ActionEvent evt) throws IOException {             //设置点击 立即评论 后的触发事件（进行数据库和网络操作）
+		 String str= JOptionPane.showInputDialog(null, "请输入您的评论","评论", JOptionPane.PLAIN_MESSAGE);	
+		 user.addComment(id,str);
 	}
-		
 	
 	private javax.swing.JPanel jPanel;
 	private javax.swing.JScrollPane jScrollPane1;
