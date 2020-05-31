@@ -1,10 +1,18 @@
 package client.ui;
 import javax.swing.*;
+
 import client.UserClient;
+
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 public class MessageFrame extends javax.swing.JFrame {
-    public static void main(String[] args) {
+	JTextArea show_area = new JTextArea(10,28);                //设置聊天框大小
+	JTextArea input_area = new JTextArea(5,28);                // 设置输入框大小
+	JButton send = new JButton("发送消息");	  
+	JLabel id=new JLabel(" 输入接收人id:");
+	JTextField id_input=new JTextField(15);                     // 设置输入接收人id的输入框
+	public static void main(String[] args) {
         MessageFrame f = new MessageFrame(null);
     }
     private  UserClient user;
@@ -16,12 +24,6 @@ public class MessageFrame extends javax.swing.JFrame {
 		chat_frame.setSize(450,520);                              //设置大小
 		chat_frame.setLocationRelativeTo(null);
 		chat_frame.setLayout(new FlowLayout());
- 
-		JTextArea show_area = new JTextArea(10,28);                //设置聊天框大小
-		JTextArea input_area = new JTextArea(5,28);                // 设置输入框大小
-		JButton send = new JButton("发送消息");	  
-		JLabel id=new JLabel(" 输入接收人id:");
-		JTextField id_input=new JTextField(15);                     // 设置输入接收人id的输入框
 		chat_frame.add(show_area);
 		chat_frame.add(input_area);
 		chat_frame.add(id);
@@ -32,15 +34,23 @@ public class MessageFrame extends javax.swing.JFrame {
 	       /*
 	        * 设置不可编辑 
 	        */
-	
+
+		 //chat_frame.pack();
 	send.addActionListener(new java.awt.event.ActionListener() {                //设置 发送消息监听器
 			public void actionPerformed(java.awt.event.ActionEvent evt) {              
-				sendActionPerformed(evt);
+				try {
+					sendActionPerformed(evt);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
- 
-	}
-    private void sendActionPerformed(java.awt.event.ActionEvent evt) {             //设置点击 发送消息 后的触发事件
-		                                          
+	}   
+    private void sendActionPerformed(java.awt.event.ActionEvent evt) throws IOException {             //设置点击 发送消息 后的触发事件
+    	user.sendMessage(id_input.getText(),input_area.getText()); 
+    	show_area.setText(input_area.getText());                                     //发送后显示框显示输入框内容
+    	input_area.setText("");                                                      //发送后输入框清空
+	
 	} 
 }
