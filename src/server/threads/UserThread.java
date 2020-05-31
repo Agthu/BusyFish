@@ -63,7 +63,15 @@ public class UserThread extends Thread {
 
                     case ADD_COMMENT:
                         new AddCommentThread(client).start();
+                        break;
 
+                    case BUY_PRODUCT:
+                        new BuyProductThread(client).start();
+                        break;
+
+                    case SEND_MESSAGE:
+                        new SendMessageThread(client).start();
+                        break;
                     default:
                         break;
                 }

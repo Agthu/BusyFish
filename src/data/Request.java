@@ -24,7 +24,9 @@ public class Request implements Serializable {
         //发布评论
         ADD_COMMENT,
         //发送消息
-        SEND_MESSAGE
+        SEND_MESSAGE,
+        //购买商品
+        BUY_PRODUCT
     }
 
     private final RequestType requestType;

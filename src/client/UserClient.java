@@ -115,4 +115,23 @@ public class UserClient {
         oos.writeObject(new Request(Request.RequestType.ADD_PRO));
         oos.writeObject(new Product(name, description, price));
     }
+
+    /**
+     * 购买商品
+     * @param productId 商品id
+     */
+    public void buyProduct(int productId) throws IOException {
+        oos.writeObject(new Request(Request.RequestType.BUY_PRODUCT));
+        oos.writeObject(new Product(productId));
+    }
+
+    /**
+     * 发送消息
+     * @param to 接收者id
+     * @param content 消息内容
+     */
+    public void sendMessage(String to, String content) throws IOException {
+        oos.writeObject(new Request(Request.RequestType.SEND_MESSAGE));
+        oos.writeObject(new Message(to, content));
+    }
 }
