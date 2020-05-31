@@ -12,8 +12,8 @@ public class MessageFrame extends javax.swing.JFrame {
 	JButton send = new JButton("发送消息");	  
 	JLabel id=new JLabel(" 输入接收人id:");
 	JTextField id_input=new JTextField(15);                     // 设置输入接收人id的输入框
-	public static void main(String[] args) {
-        MessageFrame f = new MessageFrame(null);
+	public  void main(String[] args) {
+        MessageFrame f = new MessageFrame(user);
     }
     private  UserClient user;
     
@@ -49,7 +49,7 @@ public class MessageFrame extends javax.swing.JFrame {
 	}   
     private void sendActionPerformed(java.awt.event.ActionEvent evt) throws IOException {             //设置点击 发送消息 后的触发事件
     	user.sendMessage(id_input.getText(),input_area.getText()); 
-    	show_area.append("\n"+input_area.getText());                                    //发送后显示框添加输入框内容
+    	show_area.append("\n"+input_area.getText());                                    //发送后显示框显示输入框内容
     	input_area.setText("");                                                      //发送后输入框清空
 	
 	} 
