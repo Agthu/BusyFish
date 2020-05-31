@@ -17,7 +17,7 @@ import client.UserClient;
 import data.Comment;
 import data.Product;
 public class BuyProductFrame extends javax.swing.JFrame {
-	public  Integer id;
+	public  int id;
 	private UserClient user;
 	public BuyProductFrame(UserClient user) throws IOException, ClassNotFoundException {
 		// 当前用户
