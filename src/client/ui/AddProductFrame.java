@@ -89,6 +89,7 @@ public class AddProductFrame extends javax.swing.JFrame {
        
     }
     private void AddActionPerformed(java.awt.event.ActionEvent evt) throws NumberFormatException, IOException {             //设置点击 发布 后的触发事件
-    	user.addProduct( product_name.getText(),product_description.getText(),Double.parseDouble(product_price.getText()));		                                      
+    	user.addProduct( product_name.getText(),product_description.getText(),Double.parseDouble(product_price.getText()));
+		                                      
 	}   
 }
