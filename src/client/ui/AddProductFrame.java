@@ -1,6 +1,7 @@
 package client.ui;
 
 import java.awt.Image;
+import java.io.IOException;
 
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.*;
@@ -21,6 +22,7 @@ public class AddProductFrame extends javax.swing.JFrame {
     JTextField tf;   
     JButton Add;
     
+    
 
     public AddProductFrame(UserClient user) {
 		// 当前用户
@@ -38,7 +40,15 @@ public class AddProductFrame extends javax.swing.JFrame {
         Add = new JButton("发布");
         Add.addActionListener(new java.awt.event.ActionListener() {                // 设置 发布按钮监听器
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				AddActionPerformed(evt);
+				try {
+					AddActionPerformed(evt);
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 
@@ -78,7 +88,7 @@ public class AddProductFrame extends javax.swing.JFrame {
 		//this.setLocationRelativeTo(null);
        
     }
-    private void AddActionPerformed(java.awt.event.ActionEvent evt) {             //设置点击 发布 后的触发事件
-		                                      
+    private void AddActionPerformed(java.awt.event.ActionEvent evt) throws NumberFormatException, IOException {             //设置点击 发布 后的触发事件
+    	user.addProduct( product_name.getText(),product_description.getText(),Double.parseDouble(product_price.getText()));		                                      
 	}   
 }
