@@ -19,10 +19,9 @@ import client.UserClient;
 import data.Comment;
 import data.Product;
 public class ProductCommentFrame extends javax.swing.JFrame {
-	public static  int id;
+	public  int id;
 	private UserClient user;
-	public String publisher_name;
-	public ProductCommentFrame(UserClient user, Integer id) throws IOException, ClassNotFoundException {
+	public ProductCommentFrame(UserClient user, int id) throws IOException, ClassNotFoundException {
 		// 当前用户
 		this.user = user;
 		this.id=id;
@@ -111,11 +110,11 @@ pack();
 	/*
 	 * 设置布局
 	 */
-		public static void main(String args[]) {
+		public  void main(String args[]) {
 		java.awt.EventQueue.invokeLater(new Runnable() {             
 			public void run() {
 				try {
-					new ProductCommentFrame(null, id).setVisible(true);
+					new ProductCommentFrame(user, id).setVisible(true);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
