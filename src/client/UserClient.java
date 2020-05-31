@@ -99,7 +99,20 @@ public class UserClient {
      * @param id 要评论的商品id
      * @param content 评论内容
      */
-    public void addComment(int id, String content) {
+    public void addComment(int id, String content) throws IOException {
+        oos.writeObject(new Request(Request.RequestType.ADD_COMMENT));
+        oos.writeObject(new Comment(id, content));
+    }
 
+    /**
+     * 发布新商品
+     * @param name 商品名
+     * @param description 描述
+     * @param price 价格
+     * @throws IOException
+     */
+    public void addProduct(String name, String description, double price) throws IOException {
+        oos.writeObject(new Request(Request.RequestType.ADD_PRO));
+        oos.writeObject(new Product(name, description, price));
     }
 }

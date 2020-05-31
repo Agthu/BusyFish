@@ -25,7 +25,7 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="3ac63c7f-bf3f-4283-a51d-16aa8b92ee29">
-        <schema name="busyfish" object-types="table, view" />
+        <schema name="busyfish" object-types="view, table" />
       </connection>
     </loaded-nodes>
   </component>

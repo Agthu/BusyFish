@@ -371,7 +371,7 @@ public class DbUtil {
     }
 
     /**
-     * TODO 发布评论
+     * 发布评论
      * @param productId 商品id
      * @param publisherId 发布者id
      * @param content 评论内容
@@ -379,11 +379,38 @@ public class DbUtil {
      */
     public static boolean AddComment(int productId, String publisherId, String content) throws SQLException {
         Connection database = getDatabaseConnection();
-        String updateCommand = "INSERT INTO comments(comment_id,product_id,publisher_id,content)=(null,?,?,?)";
+        String updateCommand = "INSERT INTO comments(comment_id,product_id,publisher_id,content) values(null,?,?,?)";
         PreparedStatement ps = database.prepareStatement(updateCommand);
         ps.setInt(1, productId);
         ps.setString(2, publisherId);
         ps.setString(3, content);
+        try {
+            ps.executeUpdate();
+            return true;
+        } catch(SQLException e) {
+            return false;
+        } finally {
+            database.close();
+        }
+    }
+
+    /**
+     * 发送消息
+     * @param from 发送者
+     * @param to 接受者
+     * @param content 消息内容
+     * @return 成功或失败
+     */
+    public static boolean sendMessage(String from, String to, String content) throws SQLException {
+        Connection database = getDatabaseConnection();
+        String updateCommand = "INSERT INTO message(idmessage,from,to,content) values(null,?,?,?)";
+
+        PreparedStatement ps = database.prepareStatement(updateCommand);
+
+        ps.setString(1, from);
+        ps.setString(2, to);
+        ps.setString(3, content);
+
         try {
             ps.executeUpdate();
             return true;
