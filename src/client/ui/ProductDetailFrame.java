@@ -9,8 +9,8 @@ import client.UserClient;
 import data.Product;
 import data.User;
 public class ProductDetailFrame extends javax.swing.JFrame {
-    public static void main(String[] args) throws IOException, ClassNotFoundException{
-        ProductDetailFrame f = new ProductDetailFrame(null,  null);
+    public  void main(String[] args) throws IOException, ClassNotFoundException{
+        ProductDetailFrame f = new ProductDetailFrame(user,  id);
     }
     private  UserClient user;
     public  int id;
@@ -130,14 +130,12 @@ public class ProductDetailFrame extends javax.swing.JFrame {
         //设置垂直组
         layout.setVerticalGroup(vGroup);
     }
-    public ProductDetailFrame(Object user2, Object object) {
-		// TODO Auto-generated constructor stub
-	}
+  
 	private void AddActionPerformed(java.awt.event.ActionEvent evt) {             //设置点击 确定 后的触发事件(返回商品列表)
     	dispose();                                                                  //关闭该窗口   
     }   
     private void commentActionPerformed(java.awt.event.ActionEvent evt) throws IOException, ClassNotFoundException {             //设置点击 评论 后的触发事件
-    	new ProductCommentFrame(null,id).setVisible(true);
+    	new ProductCommentFrame(user,id).setVisible(true);
     	
     }  
   
