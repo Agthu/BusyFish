@@ -19,14 +19,12 @@ public class RegisterFrame extends JFrame {
 	private  UserClient user;
  
 	public static void main(String[] args) {
-		RegisterFrame frame = new RegisterFrame(null);
+		RegisterFrame frame = new RegisterFrame();
 
 		frame.setVisible(true);
 	}
  
-	public RegisterFrame(UserClient user) {
-		// 当前用户
-		this.user = user;
+	public RegisterFrame() {
 		setTitle("用户注册");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 350);
