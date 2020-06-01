@@ -110,10 +110,13 @@ public class UserClient {
      * @param description 描述
      * @param price 价格
      * @throws IOException
+     * @return 成功true，失败false
      */
-    public void addProduct(String name, String description, double price) throws IOException {
+    public boolean addProduct(String name, String description, double price) throws IOException, ClassNotFoundException {
         oos.writeObject(new Request(Request.RequestType.ADD_PRO));
         oos.writeObject(new Product(name, description, price));
+        Hint success = (Hint)ois.readObject();
+        return success.isSuccess();
     }
 
     /**
