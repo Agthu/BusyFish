@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -255,6 +256,7 @@ pack();
    
    private void jb_costActionPerformed(java.awt.event.ActionEvent evt) throws IOException {                         //购买后的触发事件      
                     user.buyProduct(id);
+                    JOptionPane.showMessageDialog(null, "购买成功！");
 	}
    
 	
