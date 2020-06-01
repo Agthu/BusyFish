@@ -51,6 +51,7 @@ public class MessageFrame extends javax.swing.JFrame {
     	user.sendMessage(id_input.getText(),input_area.getText()); 
     	show_area.append("\n"+input_area.getText());                                    //发送后显示框显示输入框内容
     	input_area.setText("");                                                      //发送后输入框清空
+    	JOptionPane.showMessageDialog(null, "发送成功！");
 	
 	} 
 }
