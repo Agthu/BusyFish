@@ -137,6 +137,7 @@ public void getcomment() throws IOException, ClassNotFoundException{
 	public void jb_commentActionPerformed(java.awt.event.ActionEvent evt) throws IOException {             //设置点击 立即评论 后的触发事件（进行数据库和网络操作）
 		 String str= JOptionPane.showInputDialog(null, "请输入您的评论","评论", JOptionPane.PLAIN_MESSAGE);	
 		 user.addComment(id,str);
+		 JOptionPane.showMessageDialog(null, "发表成功！");
 	}
 	
 	private javax.swing.JPanel jPanel;
