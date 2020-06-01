@@ -18,10 +18,10 @@ public class UserClient {
     private ObjectOutputStream oos;
     private ObjectInputStream ois;
 
-    public UserClient(Socket socket) throws IOException {
+    public UserClient(Socket socket, ObjectOutputStream oos, ObjectInputStream ois) throws IOException {
         this.socket = socket;
-        oos = new ObjectOutputStream(socket.getOutputStream());
-        ois = new ObjectInputStream(socket.getInputStream());
+        this.oos = oos;
+        this.ois = ois;
     }
 
     /**

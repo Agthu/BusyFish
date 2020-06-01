@@ -140,7 +140,7 @@ public class LoginFrame extends BFrame {
                     if(hint.isSuccess()) {
                         System.out.println("成功");
                         // 进入主界面
-                        new ViewMainFrame(new UserClient(socket));
+                        new ViewMainFrame(new UserClient(socket, oos, ois)).setVisible(true);
                     }
                 } catch (IOException | ClassNotFoundException ioException) {
                     ioException.printStackTrace();

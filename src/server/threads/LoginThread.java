@@ -58,7 +58,7 @@ public class LoginThread extends Thread {
 
                 // 密码正确，则发送登录成功提示，并开启一个新线程
                 oos.writeObject(SUCCESS_HINT);
-                new UserThread(new Client(client, user.getId())).start();
+                new UserThread(new Client(client, user.getId(), oos, ois)).start();
 
             } else {
                 oos.writeObject(FAIL_HINT);

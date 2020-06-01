@@ -10,7 +10,7 @@ import client.UserClient;
 
 import data.User;
 public class ViewMainFrame extends javax.swing.JFrame {
-	private static  UserClient user;
+	private  UserClient user;
 	public ViewMainFrame(UserClient user) {
 		this.user=user;
 		 //改变系统默认字体
@@ -115,13 +115,7 @@ public class ViewMainFrame extends javax.swing.JFrame {
 
 		pack();
 	}
-	public static void main(String args[]) {
-		java.awt.EventQueue.invokeLater(new Runnable() {                      //
-			public void run() {
-				new ViewMainFrame(user).setVisible(true);
-			}
-		});
-	}
+
 	private void jb_BuyProductActionPerformed(java.awt.event.ActionEvent evt) throws IOException, ClassNotFoundException {             //设置点击 我是买家 后的触发事件
 		new BuyProductFrame(user).setVisible(true);                                           
 	}                                                             

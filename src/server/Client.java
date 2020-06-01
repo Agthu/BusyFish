@@ -11,10 +11,10 @@ public class Client {
     private ObjectInputStream ois;
     private String userId;
 
-    public Client(Socket socket, String userId) throws IOException {
+    public Client(Socket socket, String userId, ObjectOutputStream oos, ObjectInputStream ois) throws IOException {
         this.socket = socket;
-        oos = new ObjectOutputStream(socket.getOutputStream());
-        ois = new ObjectInputStream(socket.getInputStream());
+        this.oos = oos;
+        this.ois = ois;
         this.userId = userId;
     }
 
