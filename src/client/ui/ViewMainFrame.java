@@ -10,7 +10,7 @@ import client.UserClient;
 
 import data.User;
 public class ViewMainFrame extends javax.swing.JFrame {
-	private static  UserClient user;
+	private   UserClient user;
 	public ViewMainFrame(UserClient user) {
 		this.user=user;
 		 //改变系统默认字体
@@ -115,7 +115,7 @@ public class ViewMainFrame extends javax.swing.JFrame {
 
 		pack();
 	}
-	public static void main(String args[]) {
+	public void main(String args[]) {
 		java.awt.EventQueue.invokeLater(new Runnable() {                      //
 			public void run() {
 				new ViewMainFrame(user).setVisible(true);
@@ -128,7 +128,7 @@ public class ViewMainFrame extends javax.swing.JFrame {
 	private void jb_AddProductActionPerformed(java.awt.event.ActionEvent evt) {             //设置点击 我是卖家 后的触发事件
 		new AddProductFrame(user).setVisible(true); 
 	}
-	private void jb_MessagetActionPerformed(java.awt.event.ActionEvent evt) {             //设置点击消息 后的触发事件	
+	private void jb_MessagetActionPerformed(java.awt.event.ActionEvent evt) {             //设置点击 我的 后的触发事件	
             	new MessageFrame(user).setVisible(true);                          //点击消息后的触发事件       
         ;
 	}
