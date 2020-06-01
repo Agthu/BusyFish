@@ -125,13 +125,13 @@ pack();
 			}
 		});}
 public void getcomment() throws IOException, ClassNotFoundException{
-		 LinkedList<Comment> productList =user.getCommentOf(id);             //获取商品信息
+		 LinkedList<Comment> commentList =user.getCommentOf(id);             //获取商品信息
 		   DefaultTableModel dtm = (DefaultTableModel) commentTable.getModel();
 		   dtm.setRowCount(0);//把前面的数据释放掉
-		   for(Comment p: productList){
+		   for(Comment p: commentList){
 		   Vector v = new Vector();
-			v.add(p.getPublisher_id());                      //将获得的商品名称填入表格
-			v.add(p.getContent());                     //将获得的商品发布人填入表格          
+			v.add(p.getPublisher_id());                      //将获得的发布人名称填入表格
+			v.add(p.getContent());                     //将获得的评论内容填入表格          
 			dtm.addRow(v);}
 }
 	public void jb_commentActionPerformed(java.awt.event.ActionEvent evt) throws IOException {             //设置点击 立即评论 后的触发事件（进行数据库和网络操作）
