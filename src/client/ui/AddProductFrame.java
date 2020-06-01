@@ -92,10 +92,10 @@ public class AddProductFrame extends javax.swing.JFrame {
     	//设置点击 发布 后的触发事件
     	if   (user.addProduct( product_name.getText(),product_description.getText(),Double.parseDouble(product_price.getText())))
     	{
-			JOptionPane.showMessageDialog(null, "添加成功！");
+			JOptionPane.showMessageDialog(null, "发布成功！");
 		}
 		else {
-			JOptionPane.showMessageDialog(null, "添加失败");
+			JOptionPane.showMessageDialog(null, "发布失败");
 		}
     	
 		                                      
