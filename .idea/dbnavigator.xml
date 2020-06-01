@@ -25,7 +25,7 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="3ac63c7f-bf3f-4283-a51d-16aa8b92ee29">
-        <schema name="busyfish" object-types="table, view" />
+        <schema name="busyfish" object-types="dataset trigger, constraint, index, function, column, procedure, table, view" />
       </connection>
     </loaded-nodes>
   </component>
@@ -36,7 +36,9 @@ select * from products;</console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="3ac63c7f-bf3f-4283-a51d-16aa8b92ee29" object-ref="schemas/busyfish/tables/products" />
+    </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="3ac63c7f-bf3f-4283-a51d-16aa8b92ee29" />

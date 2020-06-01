@@ -5,6 +5,7 @@ import data.Request;
 import server.Client;
 import server.threads.userrequestthread.*;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -76,7 +77,10 @@ public class UserThread extends Thread {
                         break;
                 }
 
-            } catch (IOException | ClassNotFoundException e) {
+            } catch(EOFException e) {
+                continue;
+            }
+            catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
 

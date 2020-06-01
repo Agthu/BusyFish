@@ -51,7 +51,6 @@ public class LoginThread extends Thread {
 
             // 读取客户端传来的用户信息
             User user = (User)ois.readObject();
-            client.shutdownInput();
 
             // 让用户名和密码比对
             if(DbUtil.idMatch(user.getId(), user.getPassword())) {
@@ -63,7 +62,7 @@ public class LoginThread extends Thread {
             } else {
                 oos.writeObject(FAIL_HINT);
             }
-            client.shutdownOutput();
+//            client.shutdownOutput();
         } catch (IOException | SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
