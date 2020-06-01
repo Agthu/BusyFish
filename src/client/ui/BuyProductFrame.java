@@ -19,6 +19,14 @@ import data.Comment;
 import data.Product;
 public class BuyProductFrame extends javax.swing.JFrame {
 	public  int id;
+	public  String description;
+	public  String pubsher_id;
+	public  String name;
+	public  double price;
+	public  int bought;
+
+	
+	
 	private UserClient user;
 	public BuyProductFrame(UserClient user) throws IOException, ClassNotFoundException {
 		// 当前用户
@@ -228,7 +236,11 @@ pack();
 	                   
 	
 	private void productTableMousePressed(java.awt.event.MouseEvent evt) {    
-		int row = this.productTable.getSelectedRow();            //获取鼠标放在表格中对应的行		 
+		int row = this.productTable.getSelectedRow();            //获取鼠标放在表格中对应的行	
+		 name = (String) productTable.getValueAt(row,0 );           //   获取1列的内容
+		pubsher_id = (String) productTable.getValueAt(row,1 );           //   获取第2列的内容
+		description = (String) productTable.getValueAt(row,2 );           //   获取第3列的内容
+		price = (Double) productTable.getValueAt(row,3 );           //   获取第4列的内容
 		 id = (Integer) productTable.getValueAt(row,4 );           //   获取id ,第5列的内容	
 	}
 	/*
@@ -236,7 +248,7 @@ pack();
 	 */
    private void jb_detailActionPerformed(ActionEvent evt) throws IOException, ClassNotFoundException {            
 	   //设置点击 详情 后的触发事件（进入商品详情界面）	   	   
-	   new ProductDetailFrame(user,id).setVisible(true); 		
+	   new ProductDetailFrame(user,id,name, pubsher_id, description, price, bought).setVisible(true); 		
 	}
    private void jb_refreshActionPerformed(ActionEvent evt) throws IOException, ClassNotFoundException {  
 	   //点击刷新按钮后触发事件 用于更新商品   
@@ -256,7 +268,7 @@ pack();
    
    private void jb_costActionPerformed(java.awt.event.ActionEvent evt) throws IOException {                         //购买后的触发事件      
                     user.buyProduct(id);
-                    JOptionPane.showMessageDialog(null, "购买成功！");
+                    JOptionPane.showMessageDialog(null, "添加商品成功！");
 	}
    
 	
