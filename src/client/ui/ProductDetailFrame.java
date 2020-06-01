@@ -9,7 +9,7 @@ import client.UserClient;
 import data.Product;
 import data.User;
 public class ProductDetailFrame extends javax.swing.JFrame {
-    public  void main(String[] args) throws IOException, ClassNotFoundException{
+    public void main(String[] args) throws IOException, ClassNotFoundException{
         ProductDetailFrame f = new ProductDetailFrame(user,  id);
     }
     private  UserClient user;
@@ -29,7 +29,7 @@ public class ProductDetailFrame extends javax.swing.JFrame {
     JButton confirm;
     JButton comment;
 
-    public ProductDetailFrame(UserClient user, int id) throws IOException, ClassNotFoundException{
+    public ProductDetailFrame(UserClient user, int id, String name, String publisherId, String description, double price,int bought) throws IOException, ClassNotFoundException{
 		// 当前用户
 		this.user = user;
 		this.id=id;
@@ -59,7 +59,7 @@ public class ProductDetailFrame extends javax.swing.JFrame {
        /*
         * 设置不可编辑 
         */
-        Product product = user.getProById(id);                                     // 根据id获取商品详情  
+      Product product = new Product( id,  name,  publisherId, description, price,bought);
         product_name.setText(product.getName());                                   
         product_description.setText(product.getDescription());
         product_price.setText(String.valueOf(product.getPrice()));           
