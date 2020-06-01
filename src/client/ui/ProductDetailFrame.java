@@ -9,9 +9,7 @@ import client.UserClient;
 import data.Product;
 import data.User;
 public class ProductDetailFrame extends javax.swing.JFrame {
-    public void main(String[] args) throws IOException, ClassNotFoundException{
-        ProductDetailFrame f = new ProductDetailFrame(user,  id);
-    }
+    
     private  UserClient user;
     public  int id;
     JLabel label1;
