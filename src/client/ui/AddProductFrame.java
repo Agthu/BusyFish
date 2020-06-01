@@ -88,8 +88,16 @@ public class AddProductFrame extends javax.swing.JFrame {
 		//this.setLocationRelativeTo(null);
        
     }
-    private void AddActionPerformed(java.awt.event.ActionEvent evt) throws NumberFormatException, IOException {             //设置点击 发布 后的触发事件
-    	user.addProduct( product_name.getText(),product_description.getText(),Double.parseDouble(product_price.getText()));
+    private void AddActionPerformed(java.awt.event.ActionEvent evt) throws NumberFormatException, IOException {           
+    	//设置点击 发布 后的触发事件
+    	if   (user.addProduct( product_name.getText(),product_description.getText(),Double.parseDouble(product_price.getText())))
+    	{
+			JOptionPane.showMessageDialog(null, "添加成功！");
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "添加失败");
+		}
+    	
 		                                      
 	}   
 }
